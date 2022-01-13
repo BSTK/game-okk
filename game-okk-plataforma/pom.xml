@@ -12,10 +12,10 @@
     </parent>
 
     <groupId>dev.bstk.game-okk</groupId>
-    <artifactId>game-okk-matematica</artifactId>
+    <artifactId>game-okk-plataforma</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>game-okk-matematica</name>
-    <description>game-okk-matematica</description>
+    <name>game-okk-plataforma</name>
+    <description>game-okk-plataforma</description>
 
     <properties>
         <java.version>17</java.version>
