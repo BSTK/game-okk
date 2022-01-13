@@ -10,6 +10,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -27,6 +28,23 @@ class UsuarioControllerTest {
     void deveCadastrarUmNovoUsuario() throws Exception {
         mockMvc.perform(
             post(URL_API_V1_USUARIOS)
+                .contentType(MediaType.APPLICATION_JSON))
+            .andExpect(jsonPath("$.nome").isString())
+            .andExpect(jsonPath("$.nome").isNotEmpty())
+            .andExpect(jsonPath("$.apelido").isString())
+            .andExpect(jsonPath("$.apelido").isNotEmpty())
+            .andExpect(jsonPath("$.email").isString())
+            .andExpect(jsonPath("$.email").isNotEmpty())
+            .andExpect(jsonPath("$.urlAvatar").isString())
+            .andExpect(jsonPath("$.urlAvatar").isNotEmpty())
+            .andExpect(status().isOk());
+    }
+
+    @Test
+    @DisplayName("Deve atualizar dados de um usuário")
+    void deveAtualizarDadosDeUmUsuario() throws Exception {
+        mockMvc.perform(
+            put(URL_API_V1_USUARIOS)
                 .contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.nome").isString())
             .andExpect(jsonPath("$.nome").isNotEmpty())
