@@ -15,7 +15,10 @@ public class UsuarioController {
     @PostMapping
     public ResponseEntity<UsuarioResponse> cadastraNovoUsuario() {
         final var usuarioA = new UsuarioResponse(
-            "Usuario A", "usuario-a", "usuario-a@gmail.com");
+            "Usuario A",
+            "usuario-a",
+            "usuario-a@gmail.com",
+            "https://icon-library.com/images/22224-tiger-icon_5825.png");
 
         log.info("Cadastrando novo usuário: {}", usuarioA);
 
@@ -25,7 +28,10 @@ public class UsuarioController {
     @PutMapping
     public ResponseEntity<UsuarioResponse> atualizarUsuario() {
         final var usuarioA = new UsuarioResponse(
-            "Usuario A", "usuario-a", "usuario-a@gmail.com");
+            "Usuario A",
+            "usuario-a",
+            "usuario-a@gmail.com",
+            "https://icon-library.com/images/22224-tiger-icon_5825.png");
 
         log.info("Atualizando usuário: {}", usuarioA);
 
