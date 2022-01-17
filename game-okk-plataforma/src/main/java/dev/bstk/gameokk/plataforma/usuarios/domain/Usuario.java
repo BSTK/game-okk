@@ -5,4 +5,8 @@ public record Usuario(
     String apelido,
     String email,
     String urlAvatar) {
+
+    public Usuario() {
+        this("", "", "", "");
+    }
 }
