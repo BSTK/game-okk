@@ -71,6 +71,19 @@ public class TestHelperTest {
                 .hasMessage("Caminho arquivo json deve iniciar com: '/'!"));
     }
 
+    @Test
+    public void deveLancarExcecaoComCaminhoJasonComExtensaoInvalida() {
+        Arrays.asList(
+                "/dados-teste.pdf",
+                "/dados-teste.txt",
+                "/dados-teste")
+            .forEach(fixture ->
+                Assertions
+                    .assertThatThrownBy(() -> TestHelper.fixure(fixture, DadoTeste.class))
+                    .isInstanceOf(IllegalArgumentException.class)
+                    .hasMessage("Caminho arquivo json ter a extensão .json!"));
+    }
+
     public record DadoTeste(
         String valorA,
         Integer valorB,
