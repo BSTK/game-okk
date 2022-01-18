@@ -2,11 +2,10 @@ package dev.bstk.gameokk.core;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
+
+import java.util.Arrays;
 
 public class TestHelperTest {
-
-    private ExpectedException exception = ExpectedException.none();
 
     @Test
     public void deveRetornarUmObjetoParseadoDeUmJsonValido() {
@@ -59,6 +58,18 @@ public class TestHelperTest {
             .hasMessage("Caminho arquivo json não pode ser nulo ou vazio!");
     }
 
+    @Test
+    public void deveLancarExcecaoComCaminhoJasonInvalidoNaoComecandoComBarra() {
+        Arrays.asList(
+            "dados-teste.json",
+            "\\dados-teste.json",
+            "@dados-teste.json")
+            .forEach(fixture ->
+                Assertions
+                .assertThatThrownBy(() -> TestHelper.fixure(fixture, DadoTeste.class))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("Caminho arquivo json deve iniciar com: '/'!"));
+    }
 
     public record DadoTeste(
         String valorA,
