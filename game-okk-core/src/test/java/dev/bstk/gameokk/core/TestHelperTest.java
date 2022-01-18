@@ -35,7 +35,7 @@ public class TestHelperTest {
     }
 
     @Test
-    public void deveLancarExcecaoComCaminhoJasonInvalidoNulo() {
+    public void deveLancarExcecaoComCaminhoJsonInvalidoNulo() {
         Assertions
             .assertThatThrownBy(() -> TestHelper.fixure("", DadoTeste.class))
             .isInstanceOf(IllegalArgumentException.class)
@@ -43,7 +43,7 @@ public class TestHelperTest {
     }
 
     @Test
-    public void deveLancarExcecaoComCaminhoJasonInvalidoVazio() {
+    public void deveLancarExcecaoComCaminhoJsonInvalidoVazio() {
         Assertions
             .assertThatThrownBy(() -> TestHelper.fixure("", DadoTeste.class))
             .isInstanceOf(IllegalArgumentException.class)
@@ -51,7 +51,7 @@ public class TestHelperTest {
     }
 
     @Test
-    public void deveLancarExcecaoComCaminhoJasonInvalidoEspacoEmBranco() {
+    public void deveLancarExcecaoComCaminhoJsonInvalidoEspacoEmBranco() {
         Assertions
             .assertThatThrownBy(() -> TestHelper.fixure("       ", DadoTeste.class))
             .isInstanceOf(IllegalArgumentException.class)
@@ -59,7 +59,7 @@ public class TestHelperTest {
     }
 
     @Test
-    public void deveLancarExcecaoComCaminhoJasonInvalidoNaoComecandoComBarra() {
+    public void deveLancarExcecaoComCaminhoJsonInvalidoNaoComecandoComBarra() {
         Arrays.asList(
             "dados-teste.json",
             "\\dados-teste.json",
@@ -72,7 +72,7 @@ public class TestHelperTest {
     }
 
     @Test
-    public void deveLancarExcecaoComCaminhoJasonComExtensaoInvalida() {
+    public void deveLancarExcecaoComCaminhoJsonComExtensaoInvalida() {
         Arrays.asList(
                 "/dados-teste.pdf",
                 "/dados-teste.txt",
