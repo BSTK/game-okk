@@ -34,7 +34,31 @@ public class TestHelperTest {
                 "Item D"
             );
     }
-    
+
+    @Test
+    public void deveLancarExcecaoComCaminhoJasonInvalidoNulo() {
+        Assertions
+            .assertThatThrownBy(() -> TestHelper.fixure("", DadoTeste.class))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("Caminho arquivo json não pode ser nulo ou vazio!");
+    }
+
+    @Test
+    public void deveLancarExcecaoComCaminhoJasonInvalidoVazio() {
+        Assertions
+            .assertThatThrownBy(() -> TestHelper.fixure("", DadoTeste.class))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("Caminho arquivo json não pode ser nulo ou vazio!");
+    }
+
+    @Test
+    public void deveLancarExcecaoComCaminhoJasonInvalidoEspacoEmBranco() {
+        Assertions
+            .assertThatThrownBy(() -> TestHelper.fixure("       ", DadoTeste.class))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("Caminho arquivo json não pode ser nulo ou vazio!");
+    }
+
 
     public record DadoTeste(
         String valorA,
