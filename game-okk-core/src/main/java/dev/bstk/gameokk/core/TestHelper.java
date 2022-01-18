@@ -13,16 +13,15 @@ public abstract class TestHelper {
 
     public static <T> T fixure(final String pathFixture, final Class<T> clazz) {
         try {
-            validarStringArquivoResourceJson(pathFixture);
-
+            validarCaminhoArquivoFixtureResource(pathFixture);
             final var json = new File("src/test/resources" + pathFixture);
             return JSON_MAPPER.readValue(json, clazz);
         } catch (Exception ex) {
-            throw new RuntimeException("Não foi possivél localizar o json de Fixture.", ex);
+            throw new RuntimeException("Não foi possivél localizar o json de Fixture", ex);
         }
     }
 
-    private static void validarStringArquivoResourceJson(final String arquivoResourceJson) {
+    private static void validarCaminhoArquivoFixtureResource(final String arquivoResourceJson) {
         if (Objects.isNull(arquivoResourceJson) || arquivoResourceJson.isBlank()) {
             throw new IllegalArgumentException("Caminho arquivo json não pode ser nulo ou vazio!");
         }

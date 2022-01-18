@@ -1,0 +1,10 @@
+{
+  "valorA": "Valor de A",
+  "valorB": 100,
+  "valores": [
+    "Item A",
+    "Item B",
+    "Item C",
+    "Item D"
+  ]
+}
