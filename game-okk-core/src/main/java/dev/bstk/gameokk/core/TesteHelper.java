@@ -1,16 +1,17 @@
 package dev.bstk.gameokk.core;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import dev.bstk.gameokk.core.exceptions.ArquivoFixtureNaoEncontradoException;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 
-public abstract class TestHelper {
+public abstract class TesteHelper {
 
     private static final ObjectMapper JSON_MAPPER = new ObjectMapper();
 
-    private TestHelper() { }
+    private TesteHelper() { }
 
     public static <T> T fixure(final String pathFixture, final Class<T> clazz) {
         try {
@@ -18,7 +19,7 @@ public abstract class TestHelper {
             final var json = new File("src/test/resources" + pathFixture);
             return JSON_MAPPER.readValue(json, clazz);
         } catch (IOException ex) {
-            throw new RuntimeException("Não foi possivél localizar o json de Fixture", ex);
+            throw new ArquivoFixtureNaoEncontradoException("Não foi possivél localizar o json de Fixture!", ex);
         }
     }
 
