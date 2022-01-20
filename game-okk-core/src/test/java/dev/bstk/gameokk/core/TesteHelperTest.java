@@ -99,7 +99,7 @@ public class TesteHelperTest {
             .hasMessage("Não foi possivél localizar o json de Fixture!");
     }
 
-    public record DadoTeste(
+    record DadoTeste(
         String valorA,
         Integer valorB,
         String[] valores) {
