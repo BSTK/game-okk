@@ -36,16 +36,14 @@ public class UsuarioController {
     }
 
     @PutMapping
-    public ResponseEntity<UsuarioResponse> atualizarUsuario() {
-        final var usuarioA = new UsuarioResponse(
-            "Usuario A",
-            "usuario-a",
-            "usuario-a@gmail.com",
-            "https://icon-library.com/images/22224-tiger-icon_5825.png");
+    public ResponseEntity<UsuarioResponse> atualizarUsuario(@RequestBody @Valid final UsuarioRequest request) {
+        final var usuarioAtualizar = Mapper.to(request, Usuario.class);
+        final var usuarioAtualizado = usuarioService.atualizarUsuario(usuarioAtualizar);
+        final var usuarioAtualizadoResponse = Mapper.to(usuarioAtualizado, UsuarioResponse.class);
 
-        log.info("Atualizando usuário: {}", usuarioA);
+        log.info("Usuário atualizado: {}", usuarioAtualizado);
 
-        return ResponseEntity.ok(usuarioA);
+        return ResponseEntity.ok(usuarioAtualizadoResponse);
     }
 
 }

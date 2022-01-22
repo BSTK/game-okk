@@ -1,5 +1,6 @@
 package dev.bstk.gameokk.plataforma.usuarios.api;
 
+
 import org.hibernate.validator.constraints.URL;
 
 import javax.validation.constraints.Email;
