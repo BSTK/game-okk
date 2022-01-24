@@ -1,5 +1,6 @@
 package dev.bstk.gameokk.plataforma.usuarios.domain;
 
+import dev.bstk.gameokk.core.TesteHelper;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,12 +18,7 @@ class UsuarioServiceTest {
     @Test
     @DisplayName("Deve cadastrar um novo usuario")
     void deveCadastrarUmNovoUsuario() {
-        final var usuario = new Usuario(
-            "Usuario-A",
-            "usuarioA",
-            "usuarioa.se@gmail.com",
-            "https://via.placeholder.com/300.png");
-
+        final var usuario = TesteHelper.fixure("/fixture/usuarios/novo-usuario.json", Usuario.class);
         final var usuarioCadastrado = usuarioService.cadastraNovoUsuario(usuario);
 
         Assertions
@@ -30,4 +26,11 @@ class UsuarioServiceTest {
             .isNotNull()
             .isEqualTo(usuario);
     }
+
+    @Test
+    @DisplayName("Deve lançar exceção ao cadastrar um novo usuario com email ja cadastrado")
+    void deveLancarExcecaoAoCadastrarUmNovoUsuarioComEmailJaCadastrado() {
+
+    }
+
 }
