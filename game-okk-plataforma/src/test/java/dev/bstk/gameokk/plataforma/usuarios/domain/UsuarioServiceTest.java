@@ -70,4 +70,13 @@ class UsuarioServiceTest {
             .hasMessage("Apelido já existe: " + usuarioAA.apelido());
     }
 
+    @Test
+    @DisplayName("Deve lançar exceção ao cadastrar um novo usuario passando um usuário nulo")
+    void deveLancarExcecaoAoCadastrarUmNovoUsuarioPassandoUmUsuarioNulo() {
+        Assertions
+            .assertThatThrownBy(() -> usuarioService.cadastraNovoUsuario(null))
+            .isInstanceOf(NullPointerException.class)
+            .hasMessage("Dados do usuário não podem ser nulos!");
+    }
+
 }
