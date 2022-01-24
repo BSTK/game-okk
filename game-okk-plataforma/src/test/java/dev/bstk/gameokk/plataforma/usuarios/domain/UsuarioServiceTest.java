@@ -30,7 +30,20 @@ class UsuarioServiceTest {
     @Test
     @DisplayName("Deve lançar exceção ao cadastrar um novo usuario com email ja cadastrado")
     void deveLancarExcecaoAoCadastrarUmNovoUsuarioComEmailJaCadastrado() {
+        final var usuarioAA = TesteHelper.fixure("/fixture/usuarios/novo-usuario.json", Usuario.class);
+        final var usuarioBB = TesteHelper.fixure("/fixture/usuarios/novo-usuario-B.json", Usuario.class);
+        final var usuarioCC = TesteHelper.fixure("/fixture/usuarios/novo-usuario-C.json", Usuario.class);
 
+        usuarioService.cadastraNovoUsuario(usuarioAA);
+        usuarioService.cadastraNovoUsuario(usuarioBB);
+        usuarioService.cadastraNovoUsuario(usuarioCC);
+
+        final var usuarioAAComEmailrepetido = TesteHelper.fixure("/fixture/usuarios/novo-usuario.json", Usuario.class);
+
+        Assertions
+            .assertThatThrownBy(() -> usuarioService.cadastraNovoUsuario(usuarioAAComEmailrepetido))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("Usuário ja castrado para o email: " + usuarioAA.email());
     }
 
 }
