@@ -46,4 +46,28 @@ class UsuarioServiceTest {
             .hasMessage("Usuário ja castrado para o email: " + usuarioAA.email());
     }
 
+    @Test
+    @DisplayName("Deve lançar exceção ao cadastrar um novo usuario com apelido já existente")
+    void deveLancarExcecaoAoCadastrarUmNovoUsuarioComApelidoJaExistente() {
+        final var usuarioAA = TesteHelper.fixure("/fixture/usuarios/novo-usuario.json", Usuario.class);
+        final var usuarioBB = TesteHelper.fixure("/fixture/usuarios/novo-usuario-B.json", Usuario.class);
+        final var usuarioCC = TesteHelper.fixure("/fixture/usuarios/novo-usuario-C.json", Usuario.class);
+
+        usuarioService.cadastraNovoUsuario(usuarioAA);
+        usuarioService.cadastraNovoUsuario(usuarioBB);
+        usuarioService.cadastraNovoUsuario(usuarioCC);
+
+        final var usuarioAAComApelidorepetido = new Usuario(
+            "usuario-DD",
+            usuarioAA.apelido(),
+            "usuario-dd@gmail.com",
+            usuarioAA.urlAvatar()
+        );
+
+        Assertions
+            .assertThatThrownBy(() -> usuarioService.cadastraNovoUsuario(usuarioAAComApelidorepetido))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("Apelido já existe: " + usuarioAA.apelido());
+    }
+
 }
