@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -33,6 +34,14 @@ public class UsuarioController {
             .toUri();
 
         return ResponseEntity.created(uri).build();
+    }
+
+    @GetMapping
+    public ResponseEntity<List<UsuarioResponse>> usuarios() {
+        final var usuarios = usuarioService.usuarios();
+        final var usuariosResponse = Mapper.list(usuarios, UsuarioResponse.class);
+
+        return ResponseEntity.ok(usuariosResponse);
     }
 
     @PutMapping

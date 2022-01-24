@@ -2,9 +2,7 @@ package dev.bstk.gameokk.plataforma.usuarios.domain;
 
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 @Service
 public class UsuarioService {
@@ -27,6 +25,10 @@ public class UsuarioService {
         USUARIOS.put(usuario.email(), usuario);
 
         return usuario;
+    }
+
+    public List<Usuario> usuarios() {
+        return new ArrayList<>(USUARIOS.values());
     }
 
     private void validarDadosUsuario(final Usuario usuario) {
