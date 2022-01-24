@@ -1,0 +1,22 @@
+[
+  {
+    "nome": "AAA-Usuario-A",
+    "apelido":  "aaa-usuarioA",
+    "email":  "aaa-usuario.se@gmail.com",
+    "urlAvatar": "https://via.placeholder.com/300.png"
+  },
+
+  {
+    "nome": "BBB-Usuario-B",
+    "apelido":  "bbb-usuarioB",
+    "email":  "bbb-usuario.se@gmail.com",
+    "urlAvatar": "https://via.placeholder.com/300.png"
+  },
+
+  {
+    "nome": "Usuario-CCC",
+    "apelido":  "ccc-usuarioA",
+    "email":  "ccc-usuario.se@gmail.com",
+    "urlAvatar": "https://via.placeholder.com/300.png"
+  }
+]

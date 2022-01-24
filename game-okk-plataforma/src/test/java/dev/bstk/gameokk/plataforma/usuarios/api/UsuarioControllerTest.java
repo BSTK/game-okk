@@ -14,10 +14,12 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.Arrays;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
@@ -47,6 +49,22 @@ class UsuarioControllerTest {
                 .content(OBJECT_MAPPER.writeValueAsString(usuarioAA))
                 .contentType(MediaType.APPLICATION_JSON))
             .andExpect(status().is2xxSuccessful());
+    }
+
+    @Test
+    @DisplayName("Deve retonar uma lista de usuarios")
+    void deveRetornarUmaListaDeUsuarios() throws Exception {
+        final var usuariosCadastrados = TesteHelper.fixure("/fixture/usuarios/lista-usuarios-cadastrados.json", Usuario[].class);
+
+        when(usuarioService.usuarios())
+            .thenReturn(Arrays.asList(usuariosCadastrados));
+
+        mockMvc.perform(
+                get(URL_API_V1_USUARIOS)
+                    .content(OBJECT_MAPPER.writeValueAsString(usuariosCadastrados))
+                    .contentType(MediaType.APPLICATION_JSON))
+            .andExpect(jsonPath("$.length()").value(usuariosCadastrados.length))
+            .andExpect(status().isOk());
     }
 
     @Test
