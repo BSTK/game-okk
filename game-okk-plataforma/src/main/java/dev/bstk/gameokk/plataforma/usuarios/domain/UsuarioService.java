@@ -9,7 +9,8 @@ import java.util.Objects;
 @Service
 public class UsuarioService {
 
-    private static final Map<String, Usuario> USUARIOS = new HashMap<>();
+    /// TODO: REFATORAR FORMA DE LIMPAR DADOS APÓS CADASTRO
+    public static final Map<String, Usuario> USUARIOS = new HashMap<>();
 
     public Usuario cadastraNovoUsuario(final Usuario usuario) {
         validarDadosUsuario(usuario);

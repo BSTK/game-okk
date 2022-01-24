@@ -2,6 +2,7 @@ package dev.bstk.gameokk.plataforma.usuarios.domain;
 
 import dev.bstk.gameokk.core.TesteHelper;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,6 +15,12 @@ class UsuarioServiceTest {
 
     @InjectMocks
     private UsuarioService usuarioService;
+
+    /// TODO: REFATORAR FORMA DE LIMPAR DADOS APÓS CADASTRO
+    @BeforeEach
+    public void setUp() {
+        UsuarioService.USUARIOS.clear();
+    }
 
     @Test
     @DisplayName("Deve cadastrar um novo usuario")
