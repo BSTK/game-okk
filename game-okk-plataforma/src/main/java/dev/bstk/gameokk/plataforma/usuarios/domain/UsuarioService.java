@@ -26,6 +26,10 @@ public class UsuarioService {
         return usuario;
     }
 
+    public Usuario usuarioPorApelido(final String apelido) {
+        return usuarioRepository.usuarioPorApelido(apelido);
+    }
+
     public List<Usuario> usuarios() {
         return usuarioRepository.findAll();
     }
@@ -33,14 +37,15 @@ public class UsuarioService {
     private void validarDadosUsuario(final Usuario usuario) {
         Objects.requireNonNull(usuario, "Dados do usuário não podem ser nulos!");
 
-        final boolean existeUsuarioComEmailJaCadastrado = usuarioRepository.existeUsuarioComEmailJaCadastrado(usuario.email());
+        final boolean existeUsuarioComEmailJaCadastrado = usuarioRepository.existeUsuarioComEmailJaCadastrado(usuario.getEmail());
         if (existeUsuarioComEmailJaCadastrado) {
-            throw new IllegalArgumentException("Usuário ja castrado para o email: " + usuario.email());
+            throw new IllegalArgumentException("Usuário ja castrado para o email: " + usuario.getEmail());
         }
 
-        final boolean existeUsuarioComApelidoJaCadastrado = usuarioRepository.existeUsuarioComApelidoJaCadastrado(usuario.apelido());
+        final boolean existeUsuarioComApelidoJaCadastrado = usuarioRepository.existeUsuarioComApelidoJaCadastrado(usuario.getApelido());
         if (existeUsuarioComApelidoJaCadastrado) {
-            throw new IllegalArgumentException("Apelido já existe: " + usuario.apelido());
+            throw new IllegalArgumentException("Apelido já existe: " + usuario.getApelido());
         }
     }
+
 }

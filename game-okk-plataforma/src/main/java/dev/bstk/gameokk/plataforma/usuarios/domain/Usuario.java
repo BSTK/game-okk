@@ -1,33 +1,47 @@
 package dev.bstk.gameokk.plataforma.usuarios.domain;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.URL;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
+@Data
 @Entity
-@Table(name = "DESAFIO_TENTATIVA_RESPOSTA")
-public record Usuario(
+@NoArgsConstructor
+@Table(name = "USUARIO")
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+public class Usuario {
 
     @Id
     @GeneratedValue
-    Long id,
+    @EqualsAndHashCode.Include
+    private Long id;
 
+    @NotNull
+    @NotEmpty
     @Column(name = "NOME")
-    String nome,
+    private String nome;
 
+    @NotNull
+    @NotEmpty
     @Column(name = "APELIDO")
-    String apelido,
+    private String apelido;
 
     @Email
+    @NotNull
+    @NotEmpty
     @Column(name = "EMAIL")
-    String email,
+    private String email;
 
     @URL
+    @NotNull
+    @NotEmpty
     @Column(name = "URL_AVATAR")
-    String urlAvatar) {
+    private String urlAvatar;
 
-    public Usuario() {
-        this(null, "", "", "", "");
-    }
 }

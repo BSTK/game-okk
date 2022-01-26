@@ -65,7 +65,7 @@ class UsuarioServiceTest {
         Assertions
             .assertThatThrownBy(() -> usuarioService.cadastraNovoUsuario(usuarioAAComEmailrepetido))
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("Usuário ja castrado para o email: " + usuarioAAComEmailrepetido.email());
+            .hasMessage("Usuário ja castrado para o email: " + usuarioAAComEmailrepetido.getEmail());
     }
 
     @Test
@@ -79,7 +79,7 @@ class UsuarioServiceTest {
         Assertions
             .assertThatThrownBy(() -> usuarioService.cadastraNovoUsuario(usuarioAAComApelidorepetido))
             .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage("Apelido já existe: " + usuarioAAComApelidorepetido.apelido());
+            .hasMessage("Apelido já existe: " + usuarioAAComApelidorepetido.getApelido());
     }
 
     @Test

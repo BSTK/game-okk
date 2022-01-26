@@ -11,6 +11,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Objects;
 
 @Slf4j
 @RestController
@@ -21,7 +22,7 @@ public class UsuarioController {
     private final UsuarioService usuarioService;
 
     @PostMapping
-    public ResponseEntity<Void> cadastraNovoUsuario(@RequestBody @Valid final UsuarioRequest request) {
+    public ResponseEntity<UsuarioResponse> cadastraNovoUsuario(@RequestBody @Valid final UsuarioRequest request) {
         final var novoUsuario = Mapper.to(request, Usuario.class);
         final var novoUsuarioCadastrado = usuarioService.cadastraNovoUsuario(novoUsuario);
         final var novoUsuarioCadastradoResponse = Mapper.to(novoUsuarioCadastrado, UsuarioResponse.class);
@@ -30,10 +31,10 @@ public class UsuarioController {
 
         final var uri = ServletUriComponentsBuilder.fromCurrentRequest()
             .path("/{id}")
-            .buildAndExpand(novoUsuarioCadastradoResponse.apelido())
+            .buildAndExpand(novoUsuarioCadastradoResponse.getApelido())
             .toUri();
 
-        return ResponseEntity.created(uri).build();
+        return ResponseEntity.created(uri).body(novoUsuarioCadastradoResponse);
     }
 
     @GetMapping
@@ -42,6 +43,19 @@ public class UsuarioController {
         final var usuariosResponse = Mapper.list(usuarios, UsuarioResponse.class);
 
         return ResponseEntity.ok(usuariosResponse);
+    }
+
+    @GetMapping("/{apelido}")
+    public ResponseEntity<UsuarioResponse> usuarioPorApelido(@PathVariable("apelido") final String apelido) {
+        final var usuarioPorApelido = usuarioService.usuarioPorApelido(apelido);
+
+        if (Objects.isNull(usuarioPorApelido)) {
+            return ResponseEntity.notFound().build();
+        }
+
+        final var usuarioPorApelidoResponse = Mapper.to(usuarioPorApelido, UsuarioResponse.class);
+
+        return ResponseEntity.ok(usuarioPorApelidoResponse);
     }
 
     @PutMapping
