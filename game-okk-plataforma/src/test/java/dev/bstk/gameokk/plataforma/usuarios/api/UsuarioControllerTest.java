@@ -17,6 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.Arrays;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -27,6 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class UsuarioControllerTest {
 
     private static final String URL_API_V1_USUARIOS = "/api/v1/usuarios";
+    private static final String URL_API_V1_USUARIOS_APELIDO = "/api/v1/usuarios/{apelido}";
 
     @Autowired
     private MockMvc mockMvc;
@@ -64,6 +66,23 @@ class UsuarioControllerTest {
                     .content(OBJECT_MAPPER.writeValueAsString(usuariosCadastrados))
                     .contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.length()").value(usuariosCadastrados.length))
+            .andExpect(status().isOk());
+    }
+
+    @Test
+    @DisplayName("Deve retonar um usuário por aplido")
+    void deveRetornarUmUsuarioPorApelido() throws Exception {
+        final var usuarioPorApelido = TesteHelper.fixure("/fixture/usuarios/novo-usuario.json", Usuario.class);
+
+        when(usuarioService.usuarioPorApelido(anyString()))
+            .thenReturn(usuarioPorApelido);
+
+        mockMvc.perform(
+                get(URL_API_V1_USUARIOS_APELIDO, usuarioPorApelido.getApelido()))
+            .andExpect(jsonPath("$.nome").value(usuarioPorApelido.getNome()))
+            .andExpect(jsonPath("$.apelido").value(usuarioPorApelido.getApelido()))
+            .andExpect(jsonPath("$.email").value(usuarioPorApelido.getEmail()))
+            .andExpect(jsonPath("$.urlAvatar").value(usuarioPorApelido.getUrlAvatar()))
             .andExpect(status().isOk());
     }
 
