@@ -55,6 +55,29 @@ class UsuarioServiceTest {
     }
 
     @Test
+    @DisplayName("Deve retonar um usuario por apelido")
+    void deveRetornarUmUsuarioPorApelido() {
+        final var usuario = TesteHelper.fixure("/fixture/usuarios/novo-usuario.json", Usuario.class);
+
+        when(usuarioRepository.usuarioPorApelido(anyString()))
+            .thenReturn(usuario);
+
+        final var usuarioPorApelido = usuarioService.usuarioPorApelido("usuario-A");
+
+        Assertions
+            .assertThat(usuarioPorApelido)
+            .isNotNull()
+            .isSameAs(usuario);
+
+        Assertions
+            .assertThat(usuarioPorApelido.getApelido())
+            .isNotNull()
+            .isNotEmpty()
+            .isNotBlank()
+            .isEqualTo(usuario.getApelido());
+    }
+
+    @Test
     @DisplayName("Deve lançar exceção ao cadastrar um novo usuario com email ja cadastrado")
     void deveLancarExcecaoAoCadastrarUmNovoUsuarioComEmailJaCadastrado() {
         final var usuarioAAComEmailrepetido = TesteHelper.fixure("/fixture/usuarios/novo-usuario.json", Usuario.class);
