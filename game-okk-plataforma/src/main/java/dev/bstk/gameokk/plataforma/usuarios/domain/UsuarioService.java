@@ -19,6 +19,7 @@ public class UsuarioService {
         return usuario;
     }
 
+    /// TODO: REFATORAR LÓGICA PARA ATUALIZAR DADOS DE UM USUÁRIO
     public Usuario atualizarUsuario(final Usuario usuario) {
         validarDadosUsuario(usuario);
         usuarioRepository.save(usuario);
