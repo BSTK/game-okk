@@ -16,11 +16,23 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <assertj.version>3.22.0</assertj.version>
-        <junit.test.version>4.12</junit.test.version>
+        <junit.test.version>5.8.2</junit.test.version>
         <modelmapper.version>2.3.0</modelmapper.version>
         <maven-compiler-version>3.5.1</maven-compiler-version>
         <jackson-databind.version>2.13.1</jackson-databind.version>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.junit</groupId>
+                <artifactId>junit-bom</artifactId>
+                <version>${junit.test.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
 
@@ -38,11 +50,10 @@
             <version>${jackson-databind.version}</version>
         </dependency>
 
-        <!-- JUnit Test -->
+        <!-- JUnit Jupiter -->
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.test.version}</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
             <scope>test</scope>
         </dependency>
 
@@ -58,20 +69,16 @@
 
     <build>
         <finalName>${artifactId}-${version}</finalName>
-
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven-compiler-version}</version>
-                <configuration>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                    <source>16</source>
-                    <target>16</target>
-                </configuration>
+                <version>3.8.1</version>
+            </plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.2</version>
             </plugin>
         </plugins>
-
     </build>
 
 </project>

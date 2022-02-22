@@ -2,7 +2,7 @@ package dev.bstk.gameokk.core;
 
 import dev.bstk.gameokk.core.exceptions.ArquivoFixtureNaoEncontradoException;
 import org.assertj.core.api.Assertions;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
