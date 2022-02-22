@@ -1,15 +1,16 @@
 package dev.bstk.gameokk.core;
 
 import dev.bstk.gameokk.core.exceptions.ArquivoFixtureNaoEncontradoException;
+import dev.bstk.gameokk.dto.DadoTeste;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-public class TesteHelperTest {
+class TesteHelperTest {
 
     @Test
-    public void deveRetornarUmObjetoParseadoDeUmJsonValido() {
+    void deveRetornarUmObjetoParseadoDeUmJsonValido() {
         final var fixure = TesteHelper.fixure("/dados-teste.json", DadoTeste.class);
 
         Assertions
@@ -42,7 +43,7 @@ public class TesteHelperTest {
     }
 
     @Test
-    public void deveLancarExcecaoComCaminhoJsonInvalidoNulo() {
+    void deveLancarExcecaoComCaminhoJsonInvalidoNulo() {
         Assertions
             .assertThatThrownBy(() -> TesteHelper.fixure("", DadoTeste.class))
             .isInstanceOf(IllegalArgumentException.class)
@@ -50,7 +51,7 @@ public class TesteHelperTest {
     }
 
     @Test
-    public void deveLancarExcecaoComCaminhoJsonInvalidoVazio() {
+    void deveLancarExcecaoComCaminhoJsonInvalidoVazio() {
         Assertions
             .assertThatThrownBy(() -> TesteHelper.fixure("", DadoTeste.class))
             .isInstanceOf(IllegalArgumentException.class)
@@ -58,7 +59,7 @@ public class TesteHelperTest {
     }
 
     @Test
-    public void deveLancarExcecaoComCaminhoJsonInvalidoEspacoEmBranco() {
+    void deveLancarExcecaoComCaminhoJsonInvalidoEspacoEmBranco() {
         Assertions
             .assertThatThrownBy(() -> TesteHelper.fixure("       ", DadoTeste.class))
             .isInstanceOf(IllegalArgumentException.class)
@@ -66,7 +67,7 @@ public class TesteHelperTest {
     }
 
     @Test
-    public void deveLancarExcecaoComCaminhoJsonInvalidoNaoComecandoComBarra() {
+    void deveLancarExcecaoComCaminhoJsonInvalidoNaoComecandoComBarra() {
         Arrays.asList(
             "dados-teste.json",
             "\\dados-teste.json",
@@ -79,7 +80,7 @@ public class TesteHelperTest {
     }
 
     @Test
-    public void deveLancarExcecaoComCaminhoJsonComExtensaoInvalida() {
+    void deveLancarExcecaoComCaminhoJsonComExtensaoInvalida() {
         Arrays.asList(
                 "/dados-teste.pdf",
                 "/dados-teste.txt",
@@ -92,17 +93,11 @@ public class TesteHelperTest {
     }
 
     @Test
-    public void deveLancarExcecaoDeArquivoFixtureNaoEncontrado() {
+    void deveLancarExcecaoDeArquivoFixtureNaoEncontrado() {
         Assertions
             .assertThatThrownBy(() -> TesteHelper.fixure("/arquivo-nao-existe.json", DadoTeste.class))
             .isInstanceOf(ArquivoFixtureNaoEncontradoException.class)
             .hasMessage("Não foi possivél localizar o json de Fixture!");
-    }
-
-    record DadoTeste(
-        String valorA,
-        Integer valorB,
-        String[] valores) {
     }
 
 }

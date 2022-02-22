@@ -1,14 +1,16 @@
 package dev.bstk.gameokk.core;
 
+import dev.bstk.gameokk.dto.DadoRequest;
+import dev.bstk.gameokk.dto.DadoResponse;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-public class MapperTest {
+class MapperTest {
 
     @Test
-    public void deveRetornarUmObjetoMapeadoDadoObjeto() {
+    void deveRetornarUmObjetoMapeadoDadoObjeto() {
         final var dadoRequest = new DadoRequest();
         dadoRequest.setValorA("VALOR_AAA");
         dadoRequest.setValorB("VALOR_BBB");
@@ -30,7 +32,7 @@ public class MapperTest {
     }
 
     @Test
-    public void deveRetornarUmaListaDeObjetoMapeadosDadoUmaClasse() {
+    void deveRetornarUmaListaDeObjetoMapeadosDadoUmaClasse() {
         final var dadoRequestA = new DadoRequest();
         dadoRequestA.setValorA("RequestA_VALOR_AAA");
         dadoRequestA.setValorA("RequestA_VALOR_BBB");
@@ -54,50 +56,4 @@ public class MapperTest {
             .hasOnlyElementsOfType(DadoResponse.class)
             .hasSize(dadosRequests.size());
     }
-
-
-    public static class DadoRequest {
-
-        private String valorA;
-        private String valorB;
-
-        public void setValorA(String valorA) {
-            this.valorA = valorA;
-        }
-
-        public void setValorB(String valorB) {
-            this.valorB = valorB;
-        }
-
-        public String getValorA() {
-            return valorA;
-        }
-
-        public String getValorB() {
-            return valorB;
-        }
-    }
-
-    public static class DadoResponse {
-
-        private String valorA;
-        private String valorB;
-
-        public void setValorA(String valorA) {
-            this.valorA = valorA;
-        }
-
-        public void setValorB(String valorB) {
-            this.valorB = valorB;
-        }
-
-        public String getValorA() {
-            return valorA;
-        }
-
-        public String getValorB() {
-            return valorB;
-        }
-    }
-
 }
