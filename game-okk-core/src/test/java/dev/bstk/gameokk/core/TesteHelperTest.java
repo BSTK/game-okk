@@ -4,8 +4,8 @@ import dev.bstk.gameokk.core.exceptions.ArquivoFixtureNaoEncontradoException;
 import dev.bstk.gameokk.dto.DadoTeste;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class TesteHelperTest {
 
@@ -67,37 +67,29 @@ class TesteHelperTest {
     }
 
     @Test
-    void deveLancarExcecaoComCaminhoJsonInvalidoNaoComecandoComBarra() {
-        Arrays.asList(
-            "dados-teste.json",
-            "\\dados-teste.json",
-            "@dados-teste.json")
-            .forEach(fixture ->
-                Assertions
-                .assertThatThrownBy(() -> TesteHelper.fixure(fixture, DadoTeste.class))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("Caminho arquivo json deve iniciar com: '/'!"));
-    }
-
-    @Test
-    void deveLancarExcecaoComCaminhoJsonComExtensaoInvalida() {
-        Arrays.asList(
-                "/dados-teste.pdf",
-                "/dados-teste.txt",
-                "/dados-teste")
-            .forEach(fixture ->
-                Assertions
-                    .assertThatThrownBy(() -> TesteHelper.fixure(fixture, DadoTeste.class))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage("Caminho arquivo json ter a extensão .json!"));
-    }
-
-    @Test
     void deveLancarExcecaoDeArquivoFixtureNaoEncontrado() {
         Assertions
             .assertThatThrownBy(() -> TesteHelper.fixure("/arquivo-nao-existe.json", DadoTeste.class))
             .isInstanceOf(ArquivoFixtureNaoEncontradoException.class)
             .hasMessage("Não foi possivél localizar o json de Fixture!");
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = { "dados-teste.json", "\\dados-teste.json", "@dados-teste.json" })
+    void deveLancarExcecaoComCaminhoJsonInvalidoNaoComecandoComBarra(final String fixture) {
+        Assertions
+            .assertThatThrownBy(() -> TesteHelper.fixure(fixture, DadoTeste.class))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("Caminho arquivo json deve iniciar com: '/'!");
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = { "/dados-teste.pdf", "/dados-teste.txt", "/dados-teste" })
+    void deveLancarExcecaoComCaminhoJsonComExtensaoInvalida(final String fixture) {
+        Assertions
+            .assertThatThrownBy(() -> TesteHelper.fixure(fixture, DadoTeste.class))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("Caminho arquivo json ter a extensão .json!");
     }
 
 }
