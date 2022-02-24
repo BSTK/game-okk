@@ -50,6 +50,12 @@
             <version>${commons-lang3.version}</version>
         </dependency>
 
+        <!-- Game Okk Core -->
+        <dependency>
+            <groupId>dev.bstk.game-okk-core</groupId>
+            <artifactId>game-okk-core</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>
