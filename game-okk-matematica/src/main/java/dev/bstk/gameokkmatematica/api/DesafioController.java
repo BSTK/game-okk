@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1//matematica/desafios")
+@RequestMapping("/api/v1/matematica/desafios")
 public class DesafioController {
 
     private final DesafioService desafioService;
