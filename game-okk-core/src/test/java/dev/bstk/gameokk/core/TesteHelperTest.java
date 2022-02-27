@@ -18,20 +18,20 @@ class TesteHelperTest {
             .isNotNull();
 
         Assertions
-            .assertThat(fixure.valorA())
+            .assertThat(fixure.getValorA())
             .isNotBlank()
             .isNotEmpty()
             .isEqualTo("Valor de A");
 
         Assertions
-            .assertThat(fixure.valorB())
+            .assertThat(fixure.getValorB())
             .isNotNull()
             .isNotNegative()
             .isPositive()
             .isEqualTo(100);
 
         Assertions
-            .assertThat(fixure.valores())
+            .assertThat(fixure.getValores())
             .isNotNull()
             .isNotEmpty()
             .contains(
