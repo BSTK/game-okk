@@ -1,7 +1,7 @@
 package dev.bstk.gameokkmatematica.domain.service;
 
-import dev.bstk.gameokkmatematica.domain.DesafioOperacao;
 import dev.bstk.gameokkmatematica.domain.Desafio;
+import dev.bstk.gameokkmatematica.domain.DesafioOperacao;
 import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
