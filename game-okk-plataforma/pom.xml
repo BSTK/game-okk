@@ -47,12 +47,11 @@
     </repositories>
 
     <dependencies>
-
         <!-- Game Okk Core -->
         <dependency>
             <groupId>dev.bstk.game-okk-core</groupId>
             <artifactId>game-okk-core</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
         <!-- Starter Web -->
