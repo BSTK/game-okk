@@ -19,7 +19,13 @@
     <description>game-okk-matematica</description>
 
     <properties>
+
+        <!-- Java -->
         <java.version>17</java.version>
+
+        <!-- Sonar Cloud -->
+        <sonar.organization>bstk-sonar-qube-cloud</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
 
     <dependencies>
