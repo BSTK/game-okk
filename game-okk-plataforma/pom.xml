@@ -27,6 +27,18 @@
         <sonar.organization>bstk-sonar-qube-cloud</sonar.organization>
     </properties>
 
+    <repositories>
+
+        <!-- Configuração Game Okk Repositório no GitHub Packages -->
+        <repository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/BSTK/game-okk</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
     <dependencies>
 
         <!-- Game Okk Core -->
@@ -101,8 +113,8 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>16</source>
-                    <target>16</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
             </plugin>
         </plugins>

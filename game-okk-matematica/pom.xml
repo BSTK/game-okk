@@ -28,6 +28,18 @@
         <sonar.organization>bstk-sonar-qube-cloud</sonar.organization>
     </properties>
 
+    <repositories>
+
+        <!-- Configuração Game Okk Repositório no GitHub Packages -->
+        <repository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/BSTK/game-okk</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
     <dependencies>
 
         <!-- Starter Web -->
