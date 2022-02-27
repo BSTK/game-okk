@@ -45,7 +45,7 @@ class TesteHelperTest {
     @Test
     void deveLancarExcecaoComCaminhoJsonInvalidoNulo() {
         Assertions
-            .assertThatThrownBy(() -> TesteHelper.fixure("", DadoTeste.class))
+            .assertThatThrownBy(() -> TesteHelper.fixure(null, DadoTeste.class))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("Caminho arquivo json não pode ser nulo ou vazio!");
     }
