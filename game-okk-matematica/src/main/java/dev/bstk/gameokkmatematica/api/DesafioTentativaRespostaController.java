@@ -24,7 +24,7 @@ public class DesafioTentativaRespostaController {
     private final DesafioService desafioService;
 
     @PostMapping
-    public ResponseEntity<DesafioTentativaRespostaResponse> verificarResposta(
+    public ResponseEntity<DesafioTentativaRespostaResponse> tentativaResposta(
         @RequestBody @Valid final DesafioTentativaRespostaRequest request) {
         log.info("Recebido uma nova tentativa do usuário: [ {} ]", request.getApelido());
 
