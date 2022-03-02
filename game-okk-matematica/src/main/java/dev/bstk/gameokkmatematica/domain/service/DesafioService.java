@@ -26,7 +26,21 @@ public class DesafioService {
     }
 
     public DesafioTentativaResposta tentativaResposta(DesafioTentativaRespostaRequest request) {
-        return null;
+        /// TODO: IMPLEMENTAR: CRIAR UM NOVO USUÁRIO, CASO NÃO EXISTA!
+
+        final int resultadoTentativa = Operacao
+            .of(request.getOperacao())
+            .execute(request.getFatorA(), request.getFatorB());
+
+        final boolean respostaCorreta = request.getResposta() == resultadoTentativa;
+
+        return new DesafioTentativaResposta(
+            null,
+            request.getFatorA(),
+            request.getFatorB(),
+            resultadoTentativa,
+            respostaCorreta,
+            request.getOperacao());
     }
 
     private int[] alternativas(final int fatorA, final int fatorB, final String operacao) {
