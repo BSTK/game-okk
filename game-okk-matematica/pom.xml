@@ -124,6 +124,12 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>${jacoco.version}</version>
+                <configuration>
+                    <excludes>
+                        <exclude>dev/bstk/gameokkmatematica/**/*Request.java</exclude>
+                        <exclude>dev/bstk/gameokkmatematica/**/*Response.java</exclude>
+                    </excludes>
+                </configuration>
                 <executions>
                     <execution>
                         <id>prepare-agent</id>
