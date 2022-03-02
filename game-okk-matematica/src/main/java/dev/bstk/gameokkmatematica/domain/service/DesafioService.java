@@ -25,7 +25,7 @@ public class DesafioService {
         return new Desafio(fatorA, fatorB, alternativas, operacao);
     }
 
-    public DesafioTentativaResposta verificarResposta(DesafioTentativaRespostaRequest request) {
+    public DesafioTentativaResposta tentativaResposta(DesafioTentativaRespostaRequest request) {
         return null;
     }
 

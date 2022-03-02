@@ -28,7 +28,7 @@ public class DesafioTentativaRespostaController {
         @RequestBody @Valid final DesafioTentativaRespostaRequest request) {
         log.info("Recebido uma nova tentativa do usuário: [ {} ]", request.getApelido());
 
-        final DesafioTentativaResposta tentativaResposta = desafioService.verificarResposta(request);
+        final DesafioTentativaResposta tentativaResposta = desafioService.tentativaResposta(request);
         final DesafioTentativaRespostaResponse tentativaRespostaResponse = Mapper
             .to(tentativaResposta, DesafioTentativaRespostaResponse.class);
 
