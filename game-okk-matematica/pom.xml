@@ -126,8 +126,11 @@
                 <version>${jacoco.version}</version>
                 <configuration>
                     <excludes>
-                        <exclude>dev/bstk/gameokkmatematica/**/*Request.java</exclude>
-                        <exclude>dev/bstk/gameokkmatematica/**/*Response.java</exclude>
+                        <exclude>dev/bstk/gameokkmatematica/**/*Request.*</exclude>
+                        <exclude>dev/bstk/gameokkmatematica/**/*Response.*</exclude>
+
+                        <!-- TODO: REVER CLASSSES DE ENTIDADE -->
+                        <exclude>dev/bstk/gameokkmatematica/**/*DesafioTentativaResposta.*</exclude>
                     </excludes>
                 </configuration>
                 <executions>
