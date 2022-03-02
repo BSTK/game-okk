@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import javax.validation.Payload;
 import java.lang.annotation.Annotation;
 
-
 class ContainsValidatorTest {
 
     private final ContainsValidator validator = new ContainsValidator();
