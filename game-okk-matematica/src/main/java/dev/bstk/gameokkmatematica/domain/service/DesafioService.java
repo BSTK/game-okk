@@ -1,7 +1,9 @@
 package dev.bstk.gameokkmatematica.domain.service;
 
+import dev.bstk.gameokkmatematica.api.request.DesafioTentativaRespostaRequest;
 import dev.bstk.gameokkmatematica.domain.Desafio;
-import dev.bstk.gameokkmatematica.domain.DesafioOperacao;
+import dev.bstk.gameokkmatematica.domain.DesafioTentativaResposta;
+import dev.bstk.gameokkmatematica.domain.Operacao;
 import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
@@ -17,20 +19,18 @@ public class DesafioService {
     public Desafio gerarDesafioAleatorio() {
         final int fatorA = fator();
         final int fatorB = fator();
-        final String operacao = operacao();
+        final String operacao = Operacao.operacaoAleatoria();
         final int[] alternativas = alternativas(fatorA, fatorB, operacao);
 
         return new Desafio(fatorA, fatorB, alternativas, operacao);
     }
 
-    private String operacao() {
-        return DesafioOperacao
-            .values()[RANDOM.nextInt(DesafioOperacao.values().length)]
-            .getOperador();
+    public DesafioTentativaResposta verificarResposta(DesafioTentativaRespostaRequest request) {
+        return null;
     }
 
     private int[] alternativas(final int fatorA, final int fatorB, final String operacao) {
-        final int alternativaCorreta = DesafioOperacao.of(operacao).execute(fatorA, fatorB);
+        final int alternativaCorreta = Operacao.of(operacao).execute(fatorA, fatorB);
         final int[] alternativas = new int[] { fator(), fator(), fator(), alternativaCorreta };
 
         return embaralhar(alternativas);

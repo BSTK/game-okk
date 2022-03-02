@@ -1,4 +1,4 @@
-package dev.bstk.gameokkmatematica.api;
+package dev.bstk.gameokkmatematica.api.response;
 
 import lombok.Data;
 

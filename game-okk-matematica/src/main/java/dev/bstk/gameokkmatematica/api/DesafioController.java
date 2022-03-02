@@ -1,6 +1,7 @@
 package dev.bstk.gameokkmatematica.api;
 
 import dev.bstk.gameokk.core.Mapper;
+import dev.bstk.gameokkmatematica.api.response.DesafioResponse;
 import dev.bstk.gameokkmatematica.domain.service.DesafioService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

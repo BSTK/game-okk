@@ -1,6 +1,6 @@
 package dev.bstk.gameokkmatematica.domain.service;
 
-import dev.bstk.gameokkmatematica.domain.DesafioOperacao;
+import dev.bstk.gameokkmatematica.domain.Operacao;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,7 +19,7 @@ class DesafioServiceTest {
     void deveGerarUmDesafioAleatorioComDadosValidos() {
         final var desafio = desafioService.gerarDesafioAleatorio();
 
-        final var resultadoCorreto = DesafioOperacao
+        final var resultadoCorreto = Operacao
             .of(desafio.getOperacao())
             .execute(desafio.getFatorA(), desafio.getFatorB());
 
