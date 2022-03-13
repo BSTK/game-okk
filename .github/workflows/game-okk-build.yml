@@ -14,10 +14,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - run: >
-          echo "Usuário ${{ github.event.inputs.username }}" iniciou um o JOB CI/CD
-          echo "Evento/Causa GitHub ${{ github.event.inputs.reason }}"
-
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0

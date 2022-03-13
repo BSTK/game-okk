@@ -1,0 +1,16 @@
+name: Atribuição de Issue's
+
+on:
+  issues:
+    types: [ opened ]
+
+jobs:
+  auto-assign:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Auto Atribuição de Issue's'
+        uses: pozil/auto-assign-issue@v1.0.3
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          assignees: bstk
+          
