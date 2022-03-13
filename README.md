@@ -23,4 +23,6 @@ Continuous Code Quality
 ## Game Okk Plataforma
 
 > TODO: ADICIONAR BADGES SONAR
-> 
+
+
+
