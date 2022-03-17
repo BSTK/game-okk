@@ -17,19 +17,19 @@ public class UsuarioResponse {
 
     @NotNull
     @NotBlank
-    String nome;
+    private String nome;
 
     @NotNull
     @NotBlank
-    String apelido;
+    private String apelido;
 
     @Email
     @NotNull
     @NotBlank
-    String email;
+    private String email;
 
     @URL
     @NotNull
     @NotBlank
-    String urlAvatar;
+    private String urlAvatar;
 }

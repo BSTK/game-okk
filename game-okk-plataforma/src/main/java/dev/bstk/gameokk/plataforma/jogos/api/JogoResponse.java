@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class JogosResponse {
+public class JogoResponse {
 
     @NotNull
     @NotBlank

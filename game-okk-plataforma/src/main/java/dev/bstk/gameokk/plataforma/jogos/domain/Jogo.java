@@ -1,4 +1,4 @@
-package dev.bstk.gameokk.plataforma.jogos.api;
+package dev.bstk.gameokk.plataforma.jogos.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class JogoResponse {
+public class Jogo {
 
     @NotNull
     @NotBlank
