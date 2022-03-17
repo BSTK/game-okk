@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {HomeService} from '../../service/home.service';
+import {Jogo} from './jogo';
 
 @Component({
   selector: 'app-home',
@@ -7,8 +9,18 @@ import {Component, OnInit} from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  public jogos: Jogo[] = [];
 
-  ngOnInit(): void { }
+  constructor(private readonly homeService: HomeService) { }
+
+  ngOnInit(): void {
+    this.homeService
+      .jogos()
+      .subscribe((value: Jogo[]) => {
+        if (value) {
+          this.jogos = value;
+        }
+      });
+  }
 
 }
