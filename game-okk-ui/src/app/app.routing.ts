@@ -19,4 +19,4 @@ export const APP_ROUTING_PROVIDER: any[] = [
   {provide: APP_BASE_HREF, useValue: '/game-okk'}
 ];
 
-export const ROUTING: ModuleWithProviders = RouterModule.forRoot(ROUTES, {useHash: true});
+export const ROUTING: ModuleWithProviders<any> = RouterModule.forRoot(ROUTES, {useHash: true});
