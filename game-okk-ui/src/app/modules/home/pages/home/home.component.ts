@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HomeService} from '../../service/home.service';
 import {Jogo} from './jogo';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +12,7 @@ export class HomeComponent implements OnInit {
 
   public jogos: Jogo[] = [];
 
-  constructor(private readonly homeService: HomeService) { }
+  constructor(private readonly homeService: HomeService, private readonly router: Router) { }
 
   ngOnInit(): void {
     this.homeService
@@ -21,6 +22,14 @@ export class HomeComponent implements OnInit {
           this.jogos = value;
         }
       });
+  }
+
+  public jogarPartida(contexto: string) {
+    console.log('contexto = ', contexto);
+
+    /// TODO: CHAMA SERVIÇO DO JOGO PARA CRIAR UMA NOVA PARTIDA
+    /// TODO: this.router.navigate(['contexto/ID_DA_PARTIDA']);
+    this.router.navigateByUrl('/matematica-play/1234');
   }
 
 }

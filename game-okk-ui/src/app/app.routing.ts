@@ -12,7 +12,12 @@ const ROUTES: Routes = [
     path: 'home',
     loadChildren: () => import('./modules/home/home.module')
       .then(module => module.HomeModule)
-  }
+  },
+  {
+    path: '',
+    loadChildren: () => import('./modules/jogo/jogo.module')
+      .then(module => module.JogoModule)
+  },
 ];
 
 export const APP_ROUTING_PROVIDER: any[] = [

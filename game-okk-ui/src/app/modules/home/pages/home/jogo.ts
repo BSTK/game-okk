@@ -1,5 +1,5 @@
 export interface Jogo {
-  uuid: string;
+  contexto: string;
   titulo: string;
   descricao: string;
   urlIcone: string;
