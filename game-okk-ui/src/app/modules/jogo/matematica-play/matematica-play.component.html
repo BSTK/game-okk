@@ -1,12 +1,9 @@
 <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
-  <h1 class="display-1 fw-normal">
+  <h1 class="display-1 fw-normal" [ngClass]="classAcertoErro">
     {{ desafio.fatorA }}
     {{ desafio.operacao }}
     {{ desafio.fatorB }}
   </h1>
-  <h4 class="display-6" [ngClass]="classAcertoErro">
-    {{ menssagemAcertoErro }}
-  </h4>
 </div>
 
 <div class="row text-center">
