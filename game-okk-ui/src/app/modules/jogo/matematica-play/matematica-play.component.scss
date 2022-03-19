@@ -1,0 +1,19 @@
+:host {
+  .botao {
+    cursor: pointer;
+  }
+
+  .botao:hover {
+    border: 3px solid #DEE2E6;
+  }
+
+  .acertou {
+    color: #59CC02;
+    font-weight: 400;
+  }
+
+  .errou {
+    font-weight: 400;
+    color: #FE4848;
+  }
+}

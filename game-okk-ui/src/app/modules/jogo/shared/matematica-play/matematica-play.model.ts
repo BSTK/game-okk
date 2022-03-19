@@ -1,11 +1,11 @@
-export class Desafio {
+export interface Desafio {
   fatorA: number;
   fatorB: number;
   alternativas: number[];
   operacao: string;
 }
 
-export class DesafioTentativaResposta {
+export interface DesafioTentativaResposta {
   fatorA: number;
   fatorB: number;
   resultado: number;
@@ -13,10 +13,9 @@ export class DesafioTentativaResposta {
   operacao: string;
 }
 
-export class DesafioTentativa {
+export interface DesafioTentativa {
   fatorA: number;
   fatorB: number;
   resposta: number;
   operacao: string;
-  apelido: string;
 }

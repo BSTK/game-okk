@@ -1,1 +1,22 @@
-<h1>MATEMÁTICA PLAY!!</h1>
+<div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+  <h1 class="display-1 fw-normal">
+    {{ desafio.fatorA }}
+    {{ desafio.operacao }}
+    {{ desafio.fatorB }}
+  </h1>
+  <h4 class="display-6" [ngClass]="classAcertoErro">
+    {{ menssagemAcertoErro }}
+  </h4>
+</div>
+
+<div class="row text-center">
+  <div class="col-6 mb-3" *ngFor="let alternativa of desafio.alternativas">
+    <div class="card mb-6 p-3 rounded-3 shadow-sm botao"
+         (click)="jogar(alternativa)">
+      <div class="card-body">
+        <h1 class="card-title pricing-card-title">{{ alternativa }}</h1>
+      </div>
+    </div>
+  </div>
+</div>
+

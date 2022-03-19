@@ -9,6 +9,12 @@ export class Api {
     plataforma: {
       jogos: Api.urlBackend(Api.API_JOGOS)
     },
+    matematicaPlay: {
+      desafios: {
+        aleatorio: 'http://localhost:8081/game-okk-matematica-play/api/v1/matematica/desafios',
+        verificarResposta: 'http://localhost:8081/game-okk-matematica-play/api/v1/matematica/verificar-resposta'
+      }
+    }
   });
 
   private static urlBackend(path: string | string[]) {
