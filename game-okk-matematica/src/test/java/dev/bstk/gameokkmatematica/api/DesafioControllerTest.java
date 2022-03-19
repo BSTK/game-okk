@@ -8,6 +8,7 @@ import dev.bstk.gameokkmatematica.domain.Desafio;
 import dev.bstk.gameokkmatematica.domain.DesafioTentativaResposta;
 import dev.bstk.gameokkmatematica.domain.Operacao;
 import dev.bstk.gameokkmatematica.domain.service.DesafioService;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -29,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class DesafioControllerTest {
 
     private static final String ENDPOINT_API_V1_DESAFIOS = "/api/v1/matematica/desafios";
-    private static final String ENDPOINT_API_V1_TENTATIVA_RESPOSTA = "/api/v1/matematica/tentativa-resposta";
+    private static final String ENDPOINT_API_V1_TENTATIVA_RESPOSTA = "/api/v1/matematica/verificar-resposta";
 
     @Autowired
     private MockMvc mockMvc;
@@ -65,7 +66,7 @@ class DesafioControllerTest {
         final Long tentativaId = 1L;
 
         final DesafioTentativaRespostaRequest request = new DesafioTentativaRespostaRequest(
-            50, 50, 100, Operacao.ADICAO.getOperador(), "usuario-mock");
+            50, 50, 100, Operacao.ADICAO.getOperador());
 
         final DesafioTentativaResposta respostaEsperada = new DesafioTentativaResposta(
             tentativaId, 50, 50, 100, true, Operacao.ADICAO.getOperador());
@@ -94,7 +95,7 @@ class DesafioControllerTest {
     @DisplayName("Deve postar uma tentativa com request inválido (Operação Inválida)")
     void devePostarUmaTentativaComRequestInvalido_OperacaoInvalida() throws Exception {
         final DesafioTentativaRespostaRequest request = new DesafioTentativaRespostaRequest(
-            50, 50, 100, "#", "usuario-mock");
+            50, 50, 100, "#");
 
         this.mockMvc.perform(
                 post(ENDPOINT_API_V1_TENTATIVA_RESPOSTA)
@@ -107,7 +108,7 @@ class DesafioControllerTest {
     @DisplayName("Deve postar uma tentativa com request inválido (FatorA negativo)")
     void devePostarUmaTentativaComRequestInvalido_FatorANegativo() throws Exception {
         final DesafioTentativaRespostaRequest request = new DesafioTentativaRespostaRequest(
-            -1, 50, 100, Operacao.SUBTRACAO.getOperador(), "usuario-mock");
+            -1, 50, 100, Operacao.SUBTRACAO.getOperador());
 
         this.mockMvc.perform(
                 post(ENDPOINT_API_V1_TENTATIVA_RESPOSTA)
@@ -120,7 +121,7 @@ class DesafioControllerTest {
     @DisplayName("Deve postar uma tentativa com request inválido (FatorA maior que 99)")
     void devePostarUmaTentativaComRequestInvalido_FatorAMaiorQue99() throws Exception {
         final DesafioTentativaRespostaRequest request = new DesafioTentativaRespostaRequest(
-            999, 50, 100, Operacao.SUBTRACAO.getOperador(), "usuario-mock");
+            999, 50, 100, Operacao.SUBTRACAO.getOperador());
 
         this.mockMvc.perform(
                 post(ENDPOINT_API_V1_TENTATIVA_RESPOSTA)
@@ -133,7 +134,7 @@ class DesafioControllerTest {
     @DisplayName("Deve postar uma tentativa com request inválido (FatorB negativo)")
     void devePostarUmaTentativaComRequestInvalido_FatorBNegativo() throws Exception {
         final DesafioTentativaRespostaRequest request = new DesafioTentativaRespostaRequest(
-            10, -1, 100, Operacao.SUBTRACAO.getOperador(), "usuario-mock");
+            10, -1, 100, Operacao.SUBTRACAO.getOperador());
 
         this.mockMvc.perform(
                 post(ENDPOINT_API_V1_TENTATIVA_RESPOSTA)
@@ -146,7 +147,7 @@ class DesafioControllerTest {
     @DisplayName("Deve postar uma tentativa com request inválido (FatorB maior que 99)")
     void devePostarUmaTentativaComRequestInvalido_FatorBMaiorQue99() throws Exception {
         final DesafioTentativaRespostaRequest request = new DesafioTentativaRespostaRequest(
-            10, 999, 100, Operacao.SUBTRACAO.getOperador(), "usuario-mock");
+            10, 999, 100, Operacao.SUBTRACAO.getOperador());
 
         this.mockMvc.perform(
                 post(ENDPOINT_API_V1_TENTATIVA_RESPOSTA)
@@ -159,7 +160,7 @@ class DesafioControllerTest {
     @DisplayName("Deve postar uma tentativa com request inválido (Resposta negativo)")
     void devePostarUmaTentativaComRequestInvalido_RespostaNegativo() throws Exception {
         final DesafioTentativaRespostaRequest request = new DesafioTentativaRespostaRequest(
-            10, 999, -1, Operacao.SUBTRACAO.getOperador(), "usuario-mock");
+            10, 999, -1, Operacao.SUBTRACAO.getOperador());
 
         this.mockMvc.perform(
                 post(ENDPOINT_API_V1_TENTATIVA_RESPOSTA)
@@ -169,10 +170,11 @@ class DesafioControllerTest {
     }
 
     @Test
+    @Disabled("DEV - IGNORADO")
     @DisplayName("Deve postar uma tentativa com request inválido (Resposta negativo)")
     void devePostarUmaTentativaComRequestInvalido_ApelidoNulo() throws Exception {
         final DesafioTentativaRespostaRequest request = new DesafioTentativaRespostaRequest(
-            10, 10, -1, Operacao.SUBTRACAO.getOperador(), null);
+            10, 10, -1, Operacao.SUBTRACAO.getOperador());
 
         this.mockMvc.perform(
                 post(ENDPOINT_API_V1_TENTATIVA_RESPOSTA)
@@ -182,10 +184,11 @@ class DesafioControllerTest {
     }
 
     @Test
+    @Disabled("DEV - IGNORADO")
     @DisplayName("Deve postar uma tentativa com request inválido (Resposta negativo)")
     void devePostarUmaTentativaComRequestInvalido_ApelidoVazio() throws Exception {
         final DesafioTentativaRespostaRequest request = new DesafioTentativaRespostaRequest(
-            10, 10, 0, Operacao.SUBTRACAO.getOperador(), "");
+            10, 10, 0, Operacao.SUBTRACAO.getOperador());
 
         this.mockMvc.perform(
                 post(ENDPOINT_API_V1_TENTATIVA_RESPOSTA)
@@ -195,10 +198,11 @@ class DesafioControllerTest {
     }
 
     @Test
+    @Disabled("DEV - IGNORADO")
     @DisplayName("Deve postar uma tentativa com request inválido (Resposta negativo)")
     void devePostarUmaTentativaComRequestInvalido_ApelidoBranco() throws Exception {
         final DesafioTentativaRespostaRequest request = new DesafioTentativaRespostaRequest(
-            10, 10, 0, Operacao.SUBTRACAO.getOperador(), "  ");
+            10, 10, 0, Operacao.SUBTRACAO.getOperador());
 
         this.mockMvc.perform(
                 post(ENDPOINT_API_V1_TENTATIVA_RESPOSTA)

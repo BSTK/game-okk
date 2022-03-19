@@ -37,7 +37,7 @@ class DesafioServiceTest {
     void deveEnviarUmaTentativaDeResposta(final boolean tentivaCorreta) {
         final var request = new DesafioTentativaRespostaRequest(100, 100,
             tentivaCorreta ? 200 : 2000,
-            Operacao.ADICAO.getOperador(), "usuario-mock");
+            Operacao.ADICAO.getOperador());
 
         final var desafioTentativaResposta = desafioService.tentativaResposta(request);
 
@@ -47,5 +47,4 @@ class DesafioServiceTest {
         Assertions.assertThat(desafioTentativaResposta.getFatorB()).isEqualTo(request.getFatorB());
         Assertions.assertThat(desafioTentativaResposta.getOperacao()).isEqualTo(request.getOperacao());
     }
-
 }

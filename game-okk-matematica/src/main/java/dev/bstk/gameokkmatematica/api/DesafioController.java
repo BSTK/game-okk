@@ -29,10 +29,10 @@ public class DesafioController {
         return ResponseEntity.ok(desafioResponse);
     }
 
-    @PostMapping("/tentativa-resposta")
-    public ResponseEntity<DesafioTentativaRespostaResponse> tentativaResposta(
+    @PostMapping("/verificar-resposta")
+    public ResponseEntity<DesafioTentativaRespostaResponse> verificarResposta(
         @RequestBody @Valid final DesafioTentativaRespostaRequest request) {
-        log.info("Recebido uma nova tentativa do usuário: [ {} ]", request.getApelido());
+        log.info("Recebido uma nova tentativa de resposta!");
 
         final DesafioTentativaResposta tentativaResposta = desafioService.tentativaResposta(request);
         final DesafioTentativaRespostaResponse tentativaRespostaResponse = Mapper
@@ -40,5 +40,4 @@ public class DesafioController {
 
         return ResponseEntity.ok(tentativaRespostaResponse);
     }
-
 }
