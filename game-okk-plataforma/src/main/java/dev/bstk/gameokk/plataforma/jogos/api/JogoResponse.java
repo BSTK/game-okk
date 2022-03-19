@@ -14,7 +14,7 @@ public class JogoResponse {
 
     @NotNull
     @NotBlank
-    private String uuid;
+    private String contexto;
 
     @NotNull
     @NotBlank

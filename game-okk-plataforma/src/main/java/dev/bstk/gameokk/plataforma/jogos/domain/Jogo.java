@@ -14,7 +14,7 @@ public class Jogo {
 
     @NotNull
     @NotBlank
-    private String uuid;
+    private String contexto;
 
     @NotNull
     @NotBlank
