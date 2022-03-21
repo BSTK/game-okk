@@ -8,7 +8,6 @@ import dev.bstk.gameokkmatematica.domain.Desafio;
 import dev.bstk.gameokkmatematica.domain.DesafioTentativaResposta;
 import dev.bstk.gameokkmatematica.domain.Operacao;
 import dev.bstk.gameokkmatematica.domain.service.DesafioService;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -161,48 +160,6 @@ class DesafioControllerTest {
     void devePostarUmaTentativaComRequestInvalido_RespostaNegativo() throws Exception {
         final DesafioTentativaRespostaRequest request = new DesafioTentativaRespostaRequest(
             10, 999, -1, Operacao.SUBTRACAO.getOperador());
-
-        this.mockMvc.perform(
-                post(ENDPOINT_API_V1_TENTATIVA_RESPOSTA)
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(mapper.writeValueAsString(request)))
-            .andExpect(status().isBadRequest());
-    }
-
-    @Test
-    @Disabled("DEV - IGNORADO")
-    @DisplayName("Deve postar uma tentativa com request inválido (Resposta negativo)")
-    void devePostarUmaTentativaComRequestInvalido_ApelidoNulo() throws Exception {
-        final DesafioTentativaRespostaRequest request = new DesafioTentativaRespostaRequest(
-            10, 10, -1, Operacao.SUBTRACAO.getOperador());
-
-        this.mockMvc.perform(
-                post(ENDPOINT_API_V1_TENTATIVA_RESPOSTA)
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(mapper.writeValueAsString(request)))
-            .andExpect(status().isBadRequest());
-    }
-
-    @Test
-    @Disabled("DEV - IGNORADO")
-    @DisplayName("Deve postar uma tentativa com request inválido (Resposta negativo)")
-    void devePostarUmaTentativaComRequestInvalido_ApelidoVazio() throws Exception {
-        final DesafioTentativaRespostaRequest request = new DesafioTentativaRespostaRequest(
-            10, 10, 0, Operacao.SUBTRACAO.getOperador());
-
-        this.mockMvc.perform(
-                post(ENDPOINT_API_V1_TENTATIVA_RESPOSTA)
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(mapper.writeValueAsString(request)))
-            .andExpect(status().isBadRequest());
-    }
-
-    @Test
-    @Disabled("DEV - IGNORADO")
-    @DisplayName("Deve postar uma tentativa com request inválido (Resposta negativo)")
-    void devePostarUmaTentativaComRequestInvalido_ApelidoBranco() throws Exception {
-        final DesafioTentativaRespostaRequest request = new DesafioTentativaRespostaRequest(
-            10, 10, 0, Operacao.SUBTRACAO.getOperador());
 
         this.mockMvc.perform(
                 post(ENDPOINT_API_V1_TENTATIVA_RESPOSTA)
