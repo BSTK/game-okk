@@ -1,4 +1,4 @@
-package dev.bstk.gameokk.plataforma;
+package dev.bstk.gameokkjogoforca;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
