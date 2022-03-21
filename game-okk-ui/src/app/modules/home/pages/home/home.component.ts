@@ -29,7 +29,15 @@ export class HomeComponent implements OnInit {
 
     /// TODO: CHAMA SERVIÇO DO JOGO PARA CRIAR UMA NOVA PARTIDA
     /// TODO: this.router.navigate(['contexto/ID_DA_PARTIDA']);
-    this.router.navigateByUrl('/matematica-play/1234');
+
+    /// TODO: MATEMATICA PLAY
+    /// this.router.navigateByUrl('/matematica-play/1234');
+
+    /// TODO: JOGO DA VELHA
+    /// this.router.navigateByUrl('/jogo-da-velha/1234');
+
+    /// TODO: JOGO DA FORCA
+    this.router.navigateByUrl('/jogo-da-forca/1234');
   }
 
 }
