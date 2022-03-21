@@ -4,17 +4,21 @@ import dev.bstk.gameokkmatematica.api.request.DesafioTentativaRespostaRequest;
 import dev.bstk.gameokkmatematica.domain.model.Desafio;
 import dev.bstk.gameokkmatematica.domain.model.DesafioTentativaResposta;
 import dev.bstk.gameokkmatematica.domain.model.Operacao;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
 
 @Service
+@AllArgsConstructor
 public class DesafioService {
 
     private static final int FATOR_MINIMO = 11;
     private static final int FATOR_MAXIMO = 100;
-
     private static final SecureRandom RANDOM = new SecureRandom();
+
+    private final DesafioRepository desafioRepository;
+
 
     public Desafio gerarDesafioAleatorio() {
         final int fatorA = fator();
@@ -25,22 +29,25 @@ public class DesafioService {
         return new Desafio(fatorA, fatorB, alternativas, operacao);
     }
 
-    public DesafioTentativaResposta tentativaResposta(DesafioTentativaRespostaRequest request) {
-        /// TODO: IMPLEMENTAR: CRIAR UM NOVO USUÁRIO, CASO NÃO EXISTA!
-
+    public DesafioTentativaResposta tentativaResposta(final DesafioTentativaRespostaRequest request) {
         final int resultadoTentativa = Operacao
             .of(request.getOperacao())
             .execute(request.getFatorA(), request.getFatorB());
 
         final boolean respostaCorreta = request.getResposta() == resultadoTentativa;
 
-        return new DesafioTentativaResposta(
+        final var desafioTentativaResposta = new DesafioTentativaResposta(
             null,
             request.getFatorA(),
             request.getFatorB(),
             resultadoTentativa,
             respostaCorreta,
             request.getOperacao());
+
+        final var desafioTentativaRespostaSalva = desafioRepository.save(desafioTentativaResposta);
+
+        /// TODO: IMPLEMENTAR ENVIO PARA FILA DE RANKING/ESTATISTICAS
+        return desafioTentativaRespostaSalva;
     }
 
     private int[] alternativas(final int fatorA, final int fatorB, final String operacao) {

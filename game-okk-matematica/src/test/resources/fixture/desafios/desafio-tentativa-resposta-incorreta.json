@@ -1,0 +1,8 @@
+{
+  "id":  1,
+  "fatorA":  10,
+  "fatorB":  10,
+  "resultado": 5,
+  "correta": false,
+  "operacao": "+"
+}
