@@ -1,5 +1,6 @@
 package dev.bstk.gameokkmatematica.domain;
 
+import dev.bstk.gameokkmatematica.domain.model.Operacao;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

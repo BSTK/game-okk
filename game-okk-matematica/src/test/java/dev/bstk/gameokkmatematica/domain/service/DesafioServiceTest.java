@@ -1,7 +1,8 @@
 package dev.bstk.gameokkmatematica.domain.service;
 
 import dev.bstk.gameokkmatematica.api.request.DesafioTentativaRespostaRequest;
-import dev.bstk.gameokkmatematica.domain.Operacao;
+import dev.bstk.gameokkmatematica.domain.DesafioService;
+import dev.bstk.gameokkmatematica.domain.model.Operacao;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

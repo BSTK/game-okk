@@ -1,4 +1,4 @@
-package dev.bstk.gameokkmatematica.domain;
+package dev.bstk.gameokkmatematica.domain.model;
 
 import java.security.SecureRandom;
 import java.util.stream.Stream;
