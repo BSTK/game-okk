@@ -7,8 +7,9 @@ import java.util.List;
 
 @Data
 public class PartidaResponse implements Serializable {
-    char[] alfabeto;
-    char[] palavraSecreta;
-    char[] letrarCorretas;
-    List<PartidaDicaResponse> dicas;
+    private List<String> alfabeto;
+    private List<String> palavraSecreta;
+    private List<String> letrasCorretas;
+    private List<String> letrasIncorretas;
+    private List<PartidaDicaResponse> dicas;
 }

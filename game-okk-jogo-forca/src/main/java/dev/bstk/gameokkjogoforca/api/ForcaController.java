@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collections;
 import java.util.List;
 
 @Slf4j
@@ -37,9 +38,11 @@ public class ForcaController {
 
 
         final var partidaResponse = new PartidaResponse();
-        partidaResponse.setAlfabeto("abcdefghijklmnopqrstuvwxyz".toCharArray());
-        partidaResponse.setPalavraSecreta(new char[]{'B', 'A', 'N', 'A', 'N', 'A'});
-        partidaResponse.setDicas(List.of(dicaResponse1, dicaResponse2, dicaResponse3));
+        partidaResponse.setPalavraSecreta(List.of("B", "A", "N", "A", "N", "A"));
+        partidaResponse.setAlfabeto(List.of("A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"));
+        partidaResponse.setDicas(Collections.emptyList());
+        partidaResponse.setLetrasCorretas(Collections.emptyList());
+        partidaResponse.setLetrasIncorretas(Collections.emptyList());
 
         return ResponseEntity.ok(partidaResponse);
     }
