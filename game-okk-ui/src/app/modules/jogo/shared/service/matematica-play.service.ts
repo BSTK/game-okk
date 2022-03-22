@@ -2,7 +2,7 @@ import {Observable} from 'rxjs';
 import {Injectable} from '@angular/core';
 import {Api} from '../../../../app.api';
 import {HttpClient} from '@angular/common/http';
-import {Desafio, DesafioTentativa, DesafioTentativaResposta} from '../matematica-play/matematica-play.model';
+import {Desafio, DesafioTentativa, DesafioTentativaResposta} from '../model/matematica-play.model';
 
 @Injectable({
   providedIn: 'root'

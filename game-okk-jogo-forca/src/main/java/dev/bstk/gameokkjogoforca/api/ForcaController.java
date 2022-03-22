@@ -36,13 +36,12 @@ public class ForcaController {
         dicaResponse3.setDescircao("As folhas do pé são grandes e verdes");
         dicaResponse3.setVisivel(false);
 
-
         final var partidaResponse = new PartidaResponse();
-        partidaResponse.setPalavraSecreta(List.of("B", "A", "N", "A", "N", "A"));
+        partidaResponse.setPalavraSecreta(List.of("▬", "A", "▬", "A", "▬", "A"));
         partidaResponse.setAlfabeto(List.of("A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"));
         partidaResponse.setDicas(Collections.emptyList());
-        partidaResponse.setLetrasCorretas(Collections.emptyList());
-        partidaResponse.setLetrasIncorretas(Collections.emptyList());
+        partidaResponse.setLetrasCorretas(List.of("A"));
+        partidaResponse.setLetrasIncorretas(List.of("E", "I"));
 
         return ResponseEntity.ok(partidaResponse);
     }

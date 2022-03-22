@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Desafio, DesafioTentativaResposta} from '../shared/matematica-play/matematica-play.model';
+import {Desafio, DesafioTentativaResposta} from '../shared/model/matematica-play.model';
 import {MatematicaPlayService} from '../shared/service/matematica-play.service';
 
 @Component({

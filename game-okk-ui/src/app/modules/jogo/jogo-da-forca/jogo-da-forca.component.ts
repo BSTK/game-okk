@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {Partida} from '../shared/model/jogo-da-forca';
+import {JogoDaForcaService} from '../shared/service/jogo-da-forca.service';
 
 @Component({
   selector: 'app-jogo-da-forca',
@@ -9,10 +11,17 @@ export class JogoDaForcaComponent implements OnInit {
 
   private contador = 0;
   public assetForca: string = '/assets/jogo-da-forca/jf-asset-0.png'
+  public partida: Partida = {} as Partida;
 
-  constructor() { }
+  constructor(private readonly jogoDaForcaService: JogoDaForcaService) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.jogoDaForcaService
+      .partida()
+      .subscribe((partida: Partida) => {
+        this.partida = partida;
+      });
+  }
 
   ok() {
     this.assetForca = `/assets/jogo-da-forca/jf-asset-${this.contador}.png`

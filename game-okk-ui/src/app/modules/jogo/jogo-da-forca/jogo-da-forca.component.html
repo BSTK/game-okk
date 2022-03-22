@@ -5,42 +5,15 @@
 
   <div class="col-md-9">
     <div class="row mb-5 justify-content-center">
-      <div class="card col-1 p-1 m-2 rounded-3 border-1"><h1>A</h1></div>
-      <div class="card col-1 p-2 m-2 rounded-3 border-1"><h1></h1></div>
-      <div class="card col-1 p-2 m-2 rounded-3 border-1"><h1>A</h1></div>
-      <div class="card col-1 p-2 m-2 rounded-3 border-1"><h1></h1></div>
-      <div class="card col-1 p-2 m-2 rounded-3 border-1"><h1>A</h1></div>
-      <div class="card col-1 p-2 m-2 rounded-3 border-1"><h1></h1></div>
-      <div class="card col-1 p-2 m-2 rounded-3 border-1"><h1>I</h1></div>
+      <div *ngFor="let letra of partida.palavraSecreta" class="card col-1 p-1 m-2 rounded-3 border-1">
+        <h1>{{ letra }}</h1>
+      </div>
     </div>
 
-    <div class="row mt-5">
-      <div class="card col-1 p-2 m-2 rounded-3 shadow-sm border-1 bg-success desabilitado">A</div>
-      <div class="card col-1 p-2 m-2 rounded-3 shadow-sm border-1 bg-success">B</div>
-      <div class="card col-1 p-2 m-2 rounded-3 shadow-sm border-1 bg-success">C</div>
-      <div class="card col-1 p-2 m-2 rounded-3 shadow-sm border-1">D</div>
-      <div class="card col-1 p-2 m-2 rounded-3 shadow-sm border-1">E</div>
-      <div class="card col-1 p-2 m-2 rounded-3 shadow-sm border-1">F</div>
-      <div class="card col-1 p-2 m-2 rounded-3 shadow-sm border-1 bg-danger">G</div>
-      <div class="card col-1 p-2 m-2 rounded-3 shadow-sm border-1 bg-danger">H</div>
-      <div class="card col-1 p-2 m-2 rounded-3 shadow-sm border-1">I</div>
-      <div class="card col-1 p-2 m-2 rounded-3 shadow-sm border-1">J</div>
-      <div class="card col-1 p-2 m-2 rounded-3 shadow-sm border-1">K</div>
-      <div class="card col-1 p-2 m-2 rounded-3 shadow-sm border-1">L</div>
-      <div class="card col-1 p-2 m-2 rounded-3 shadow-sm border-1">M</div>
-      <div class="card col-1 p-2 m-2 rounded-3 shadow-sm border-1">N</div>
-      <div class="card col-1 p-2 m-2 rounded-3 shadow-sm border-1">O</div>
-      <div class="card col-1 p-2 m-2 rounded-3 shadow-sm border-1">P</div>
-      <div class="card col-1 p-2 m-2 rounded-3 shadow-sm border-1">Q</div>
-      <div class="card col-1 p-2 m-2 rounded-3 shadow-sm border-1">R</div>
-      <div class="card col-1 p-2 m-2 rounded-3 shadow-sm border-1">S</div>
-      <div class="card col-1 p-2 m-2 rounded-3 shadow-sm border-1">T</div>
-      <div class="card col-1 p-2 m-2 rounded-3 shadow-sm border-1">U</div>
-      <div class="card col-1 p-2 m-2 rounded-3 shadow-sm border-1">V</div>
-      <div class="card col-1 p-2 m-2 rounded-3 shadow-sm border-1">W</div>
-      <div class="card col-1 p-2 m-2 rounded-3 shadow-sm border-1">X</div>
-      <div class="card col-1 p-2 m-2 rounded-3 shadow-sm border-1">Y</div>
-      <div class="card col-1 p-2 m-2 rounded-3 shadow-sm border-1">Z</div>
+    <div class="row mt-5 justify-content-center">
+      <div *ngFor="let letra of partida.alfabeto" class="card col-1 p-2 m-2 rounded-3 shadow-sm border-1">
+        {{ letra }}
+      </div>
     </div>
 
     <div class="row mt-3 text-start">
