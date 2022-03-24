@@ -31,4 +31,8 @@ export class JogoDaForcaComponent implements OnInit {
       this.contador = 0;
     }
   }
+
+  jogar(letra: string) {
+    console.log('Tem a letra?: ', letra);
+  }
 }

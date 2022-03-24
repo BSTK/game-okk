@@ -5,9 +5,7 @@ import dev.bstk.gameokkjogoforca.api.response.PartidaResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.List;
@@ -21,6 +19,28 @@ public class ForcaController {
 
     @GetMapping("/partida")
     public ResponseEntity<PartidaResponse> partida() {
+        return ResponseEntity.ok(mock());
+    }
+
+    @PostMapping("/jogar/{partidaId}/{letra}")
+    public ResponseEntity<PartidaResponse> jogar(@PathVariable("partidaId") final Long partidaId,
+                                                 @PathVariable("letra") final String letra) {
+        final var partidaResponse = mock();
+
+        if (partidaResponse.getPalavraSecreta().contains(letra)) {
+            final var letrasCorretas = partidaResponse.getLetrasCorretas();
+            letrasCorretas.add(letra);
+            partidaResponse.setLetrasCorretas(letrasCorretas);
+        } else {
+            final var incorretasCorretas = partidaResponse.getLetrasIncorretas();
+            incorretasCorretas.add(letra);
+            partidaResponse.setLetrasIncorretas(incorretasCorretas);
+        }
+
+        return ResponseEntity.ok(partidaResponse);
+    }
+
+    private PartidaResponse mock() {
         final var dicaResponse1 = new PartidaDicaResponse();
         dicaResponse1.setNumero(1);
         dicaResponse1.setDescircao("Uma fruta amarelada");
@@ -43,6 +63,6 @@ public class ForcaController {
         partidaResponse.setLetrasCorretas(List.of("A"));
         partidaResponse.setLetrasIncorretas(List.of("E", "I"));
 
-        return ResponseEntity.ok(partidaResponse);
+        return partidaResponse;
     }
 }
