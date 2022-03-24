@@ -1,14 +1,12 @@
 package dev.bstk.gameokkjogoforca.api;
 
-import dev.bstk.gameokkjogoforca.api.response.PartidaDicaResponse;
+import dev.bstk.gameokk.core.Mapper;
 import dev.bstk.gameokkjogoforca.api.response.PartidaResponse;
+import dev.bstk.gameokkjogoforca.domain.ForcaService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Collections;
-import java.util.List;
 
 @Slf4j
 @RestController
@@ -17,52 +15,30 @@ import java.util.List;
 public class ForcaController {
 
 
-    @GetMapping("/partida")
-    public ResponseEntity<PartidaResponse> partida() {
-        return ResponseEntity.ok(mock());
-    }
+    private final ForcaService forcaService;
 
-    @PostMapping("/jogar/{partidaId}/{letra}")
-    public ResponseEntity<PartidaResponse> jogar(@PathVariable("partidaId") final Long partidaId,
-                                                 @PathVariable("letra") final String letra) {
-        final var partidaResponse = mock();
-
-        if (partidaResponse.getPalavraSecreta().contains(letra)) {
-            final var letrasCorretas = partidaResponse.getLetrasCorretas();
-            letrasCorretas.add(letra);
-            partidaResponse.setLetrasCorretas(letrasCorretas);
-        } else {
-            final var incorretasCorretas = partidaResponse.getLetrasIncorretas();
-            incorretasCorretas.add(letra);
-            partidaResponse.setLetrasIncorretas(incorretasCorretas);
-        }
+    @GetMapping("/partida/{partidaId}")
+    public ResponseEntity<PartidaResponse> partida(@PathVariable("partidaId") final Long partidaId) {
+        final var partida = forcaService.partida(partidaId);
+        final var partidaResponse = Mapper.to(partida, PartidaResponse.class);
 
         return ResponseEntity.ok(partidaResponse);
     }
 
-    private PartidaResponse mock() {
-        final var dicaResponse1 = new PartidaDicaResponse();
-        dicaResponse1.setNumero(1);
-        dicaResponse1.setDescircao("Uma fruta amarelada");
-        dicaResponse1.setVisivel(false);
+    @PostMapping("/jogar/{partidaId}/{letra}")
+    public ResponseEntity<PartidaResponse> jogar(@PathVariable("letra") final String letra,
+                                                 @PathVariable("partidaId") final Long partidaId) {
+        final var partidaJogada = forcaService.jogar(letra, partidaId);
+        final var partidaJogadaResponse = Mapper.to(partidaJogada, PartidaResponse.class);
 
-        final var dicaResponse2 = new PartidaDicaResponse();
-        dicaResponse2.setNumero(2);
-        dicaResponse2.setDescircao("Uma fruta que pode ser descascada");
-        dicaResponse2.setVisivel(false);
+        return ResponseEntity.ok(partidaJogadaResponse);
+    }
 
-        final var dicaResponse3 = new PartidaDicaResponse();
-        dicaResponse3.setNumero(3);
-        dicaResponse3.setDescircao("As folhas do pé são grandes e verdes");
-        dicaResponse3.setVisivel(false);
+    @PostMapping("/nova-partida")
+    public ResponseEntity<PartidaResponse> novaPartida() {
+        final var partida = forcaService.novaPartida();
+        final var partidaResponse = Mapper.to(partida, PartidaResponse.class);
 
-        final var partidaResponse = new PartidaResponse();
-        partidaResponse.setPalavraSecreta(List.of("▬", "A", "▬", "A", "▬", "A"));
-        partidaResponse.setAlfabeto(List.of("A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"));
-        partidaResponse.setDicas(Collections.emptyList());
-        partidaResponse.setLetrasCorretas(List.of("A"));
-        partidaResponse.setLetrasIncorretas(List.of("E", "I"));
-
-        return partidaResponse;
+        return ResponseEntity.ok(partidaResponse);
     }
 }

@@ -1,11 +1,8 @@
 export class Api {
 
-  /// private static readonly API_V1_MATEMATICA = '/game-okk-plataforma/api/v1';
-  /// private static readonly API_V1_JOGO_FORCA = '/game-okk-jogo-forca/api/v1';
-
   static readonly URLS = Object.freeze({
     plataforma: {
-      jogos: ''
+      jogos: 'http://localhost:8080/game-okk-plataforma/api/v1/jogos'
     },
     matematicaPlay: {
       desafios: {
