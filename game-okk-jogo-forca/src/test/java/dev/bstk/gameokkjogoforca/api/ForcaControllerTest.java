@@ -15,6 +15,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -63,6 +64,18 @@ class ForcaControllerTest {
         mockMvc.perform(
                 post(ENDPOINT_API_V1_NOVA_PARTIDA)
                     .content(OBJECT_MAPPER.writeValueAsString(novaPartida))
+                    .contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().is2xxSuccessful());
+    }
+
+    @Test
+    @DisplayName("Deve efetuar uma jogada")
+    void deveEfetuarUmaJogada() throws Exception {
+        final var partidaresultadoJogada = TesteHelper.fixure("/fixture/forca/partida-em-andamento.json", Partida.class);
+        when(forcaService.jogar(anyString(), anyLong())).thenReturn(partidaresultadoJogada);
+
+        mockMvc.perform(
+                post(ENDPOINT_API_V1_JOGAR, 1L, "A")
                     .contentType(MediaType.APPLICATION_JSON))
             .andExpect(status().is2xxSuccessful());
     }
