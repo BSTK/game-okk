@@ -17,6 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(SpringExtension.class)
@@ -27,19 +28,18 @@ class ForcaControllerTest {
     private static final String ENDPOINT_API_V1_JOGAR = "/api/v1/forca/jogar/{partidaId}/{letra}";
     private static final String ENDPOINT_API_V1_PARTIDA_POR_ID = "/api/v1/forca/partida/{partidaId}";
 
-    @Autowired
-    private MockMvc mockMvc;
+    private final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     @Autowired
-    private ObjectMapper mapper;
+    private MockMvc mockMvc;
 
     @MockBean
     private ForcaService forcaService;
 
 
     @Test
-    @DisplayName("Deve retornar uma partida valida por id")
-    void deveRetornarUmaPartidaValidaPorId() throws Exception {
+    @DisplayName("Deve retornar uma partida por id valida")
+    void deveRetornarUmaPartidaPorIdValida() throws Exception {
         final var partidaPorId = TesteHelper.fixure("/fixture/forca/partida-em-andamento.json", Partida.class);
         when(forcaService.partida(anyLong())).thenReturn(partidaPorId);
 
@@ -52,5 +52,18 @@ class ForcaControllerTest {
             .andExpect(jsonPath("$.letrasCorretas").value(partidaPorId.getLetrasCorretas()))
             .andExpect(jsonPath("$.letrasIncorretas").value(partidaPorId.getLetrasIncorretas()))
             .andExpect(jsonPath("$.dicas").value(partidaPorId.getDicas()));
+    }
+
+    @Test
+    @DisplayName("Deve criar uma nova partida")
+    void deveCriarUmaNovaPartida() throws Exception {
+        final var novaPartida = TesteHelper.fixure("/fixture/forca/nova-partida.json", Partida.class);
+        when(forcaService.novaPartida()).thenReturn(novaPartida);
+
+        mockMvc.perform(
+                post(ENDPOINT_API_V1_NOVA_PARTIDA)
+                    .content(OBJECT_MAPPER.writeValueAsString(novaPartida))
+                    .contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().is2xxSuccessful());
     }
 }
