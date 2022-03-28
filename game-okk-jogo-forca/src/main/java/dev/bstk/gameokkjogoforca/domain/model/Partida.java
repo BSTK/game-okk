@@ -11,14 +11,13 @@ import java.util.UUID;
 public class Partida implements Serializable {
 
     private Long id;
-    private Object uuid;
+    private UUID uuid;
     private LocalDateTime dataInsert;
     private LocalDateTime dataUpdate;
     private List<String> alfabeto;
-    private List<String> palavraSecreta;
     private List<String> letrasCorretas;
     private List<String> letrasIncorretas;
-    private List<Dica> dicas;
+    private PalavraSecreta palavraSecreta;
     private PartidaSatus status;
 
     public void dataInsert() {

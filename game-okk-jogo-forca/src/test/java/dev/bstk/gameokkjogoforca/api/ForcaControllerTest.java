@@ -51,8 +51,7 @@ class ForcaControllerTest {
             .andExpect(jsonPath("$.alfabeto").value(partidaPorId.getAlfabeto()))
             .andExpect(jsonPath("$.palavraSecreta").value(partidaPorId.getPalavraSecreta()))
             .andExpect(jsonPath("$.letrasCorretas").value(partidaPorId.getLetrasCorretas()))
-            .andExpect(jsonPath("$.letrasIncorretas").value(partidaPorId.getLetrasIncorretas()))
-            .andExpect(jsonPath("$.dicas").value(partidaPorId.getDicas()));
+            .andExpect(jsonPath("$.letrasIncorretas").value(partidaPorId.getLetrasIncorretas()));
     }
 
     @Test

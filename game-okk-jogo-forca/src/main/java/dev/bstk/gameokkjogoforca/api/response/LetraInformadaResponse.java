@@ -5,7 +5,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
-public class PartidaLetraInformadaResponse implements Serializable {
+public class LetraInformadaResponse implements Serializable {
     char letra;
     boolean acertou;
 }

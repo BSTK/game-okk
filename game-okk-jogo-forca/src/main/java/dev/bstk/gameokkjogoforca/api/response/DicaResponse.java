@@ -5,7 +5,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
-public class PartidaDicaResponse implements Serializable {
+public class DicaResponse implements Serializable {
     int numero;
     String descircao;
     boolean visivel;
