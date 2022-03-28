@@ -21,6 +21,9 @@
         <!-- Java -->
         <java.version>11</java.version>
 
+        <!-- Hibernate Types -->
+        <hibernate.types.version>2.14.0</hibernate.types.version>
+
         <!-- Sonar Cloud -->
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <sonar.organization>bstk-sonar-qube-cloud</sonar.organization>
@@ -66,6 +69,19 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
+        <!-- Starter Data JPA -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <!-- Hibernate Types -->
+        <dependency>
+            <groupId>com.vladmihalcea</groupId>
+            <artifactId>hibernate-types-52</artifactId>
+            <version>${hibernate.types.version}</version>
         </dependency>
 
         <!-- Lombok -->

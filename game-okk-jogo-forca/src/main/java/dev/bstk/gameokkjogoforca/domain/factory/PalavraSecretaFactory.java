@@ -1,17 +1,47 @@
 package dev.bstk.gameokkjogoforca.domain.factory;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.bstk.gameokkjogoforca.domain.model.Dica;
 import dev.bstk.gameokkjogoforca.domain.model.PalavraSecreta;
 
+import java.io.File;
+import java.io.IOException;
+import java.security.SecureRandom;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 public class PalavraSecretaFactory {
 
+    private static final ObjectMapper JSON_MAPPER = new ObjectMapper();
+    private static final SecureRandom SECURE_RANDOM = new SecureRandom();
+    private static final String RESOURCES_FORCA_PALAVRAS_SECRETAS = "src/main/resources/forca/palavra-secreta.json";
+
     private PalavraSecretaFactory() { }
 
     public static PalavraSecreta palavra() {
-        return PalavraSecretaBuilder.builder().build();
+        final var palavraSecretas = carregarArquivoJsonComBancoDePalavrassecretas();
+        final var totalPalavras = palavraSecretas.size();
+        final var palavraSecretaIndex = SECURE_RANDOM.nextInt(totalPalavras);
+
+        final var palavraSecreta = palavraSecretas.get(palavraSecretaIndex);
+
+        return PalavraSecretaBuilder
+            .builder()
+            .palavra(palavraSecreta.getPalavra())
+            .dicas(palavraSecreta.getDicas())
+            .build();
+    }
+
+    private static List<PalavraSecreta> carregarArquivoJsonComBancoDePalavrassecretas() {
+        try {
+            final var json = new File(RESOURCES_FORCA_PALAVRAS_SECRETAS);
+            final var palavraSecretas = JSON_MAPPER.readValue(json, PalavraSecreta[].class);
+
+            return Arrays.asList(palavraSecretas);
+        } catch (IOException ex) {
+            throw new ArquivoNaoEncontradoException("Não foi possivél localizar o json!", ex);
+        }
     }
 
     private static final class PalavraSecretaBuilder {

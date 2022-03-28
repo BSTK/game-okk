@@ -1,5 +1,6 @@
 package dev.bstk.gameokkjogoforca.domain.factory;
 
+import dev.bstk.gameokkjogoforca.domain.model.PalavraSecreta;
 import dev.bstk.gameokkjogoforca.domain.model.Partida;
 import dev.bstk.gameokkjogoforca.domain.model.PartidaSatus;
 
@@ -15,7 +16,10 @@ public class PartidaFactory {
     private PartidaFactory() { }
 
     public static Partida partida() {
-        return PartidaBilder.builder().build();
+        return PartidaBilder
+            .builder()
+            .palavraSecreta(PalavraSecretaFactory.palavra())
+            .build();
     }
 
     private static final class PartidaBilder {
@@ -37,6 +41,11 @@ public class PartidaFactory {
 
         public PartidaBilder alfabeto(final List<String> alfabeto) {
             this.partida.setAlfabeto(alfabeto);
+            return this;
+        }
+
+        public PartidaBilder palavraSecreta(final PalavraSecreta palavraSecreta) {
+            this.partida.setPalavraSecreta(palavraSecreta);
             return this;
         }
 
