@@ -9,6 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 class ListDicaConverterTest {
@@ -32,6 +33,26 @@ class ListDicaConverterTest {
     }
 
     @Test
+    @DisplayName("Deve retonar uma string vazia para uma lista nula")
+    void deveRetonarUmaStringVaziaParaUmaListaNula() {
+        final var listaDeStringSalvar = converter.convertToDatabaseColumn(null);
+
+        Assertions.assertThat(listaDeStringSalvar)
+            .isNotNull()
+            .isEmpty();
+    }
+
+    @Test
+    @DisplayName("Deve retonar uma string vazia para uma lista vazia")
+    void deveRetonarUmaStringVaziaParaUmaListaVazia() {
+        final var listaDeStringSalvar = converter.convertToDatabaseColumn(Collections.emptyList());
+
+        Assertions.assertThat(listaDeStringSalvar)
+            .isNotNull()
+            .isEmpty();
+    }
+
+    @Test
     @DisplayName("Deve converter uma string JSON em uma lista de Dicas valida")
     void deveConverterUmaStringJSONListaDicasEmUmaListaDeDicasValida() throws JsonProcessingException {
         final var dicas = TesteHelper.fixure("/fixture/forca/palavra-secreta-dicas.json", Dica[].class);
@@ -44,5 +65,25 @@ class ListDicaConverterTest {
             .isNotEmpty()
             .hasSize(3)
             .hasOnlyElementsOfType(Dica.class);
+    }
+
+    @Test
+    @DisplayName("Deve retonar uma lista vazia uma string nula")
+    void deveRetonarUmaListaVaziaUmaStringNula() {
+        final var listaDeStringSalvar = converter.convertToEntityAttribute(null);
+
+        Assertions.assertThat(listaDeStringSalvar)
+            .isNotNull()
+            .isEmpty();
+    }
+
+    @Test
+    @DisplayName("Deve retonar uma lista vazia uma string vazia")
+    void deveRetonarUmaListaVaziaUmaStringVazia() {
+        final var listaDeStringSalvar = converter.convertToEntityAttribute("");
+
+        Assertions.assertThat(listaDeStringSalvar)
+            .isNotNull()
+            .isEmpty();
     }
 }
