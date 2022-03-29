@@ -1,5 +1,6 @@
 package dev.bstk.gameokkjogoforca.domain.model;
 
+import dev.bstk.gameokkjogoforca.domain.model.converter.ListStringConverter;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -41,16 +42,19 @@ public class Partida implements Serializable {
     @NotNull
     @NotEmpty
     @Column(name = "ALFABETO")
+    @Convert(converter = ListStringConverter.class)
     private List<String> alfabeto;
 
     @NotNull
     @NotEmpty
     @Column(name = "LETRAS_CORRETAS")
+    @Convert(converter = ListStringConverter.class)
     private List<String> letrasCorretas;
 
     @NotNull
     @NotEmpty
     @Column(name = "LETRAS_INCORRETAS")
+    @Convert(converter = ListStringConverter.class)
     private List<String> letrasIncorretas;
 
     @NotNull

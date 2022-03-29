@@ -1,5 +1,6 @@
 package dev.bstk.gameokkjogoforca.domain.model;
 
+import dev.bstk.gameokkjogoforca.domain.model.converter.ListDicaConverter;
 import dev.bstk.gameokkjogoforca.domain.model.converter.ListStringConverter;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -32,5 +33,6 @@ public class PalavraSecreta implements Serializable {
 
     @NotNull
     @NotEmpty
+    @Convert(converter = ListDicaConverter.class)
     private List<Dica> dicas;
 }
