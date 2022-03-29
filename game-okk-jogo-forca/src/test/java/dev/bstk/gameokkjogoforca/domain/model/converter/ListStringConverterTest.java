@@ -4,6 +4,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Collections;
 import java.util.List;
 
 class ListStringConverterTest {
@@ -26,6 +27,26 @@ class ListStringConverterTest {
     }
 
     @Test
+    @DisplayName("Deve retonar uma string vazia para uma lista nula")
+    void deveRetonarUmaStringVaziaParaUmaListaNula() {
+        final var listaDeStringSalvar = converter.convertToDatabaseColumn(null);
+
+        Assertions.assertThat(listaDeStringSalvar)
+            .isNotNull()
+            .isEmpty();
+    }
+
+    @Test
+    @DisplayName("Deve retonar uma string vazia para uma lista vazia")
+    void deveRetonarUmaStringVaziaParaUmaListaVazia() {
+        final var listaDeStringSalvar = converter.convertToDatabaseColumn(Collections.emptyList());
+
+        Assertions.assertThat(listaDeStringSalvar)
+            .isNotNull()
+            .isEmpty();
+    }
+
+    @Test
     @DisplayName("Deve converter uma string JSON em uma lista de Dicas valida")
     void deveConverterUmaStringJSONListaDicasEmUmaListaDeDicasValida() {
         List<String> listaDeStringBanco = converter.convertToEntityAttribute("[\"C\",\"A\",\"R\"]");
@@ -34,5 +55,25 @@ class ListStringConverterTest {
             .isNotNull()
             .isNotEmpty()
             .contains("C", "A", "R");
+    }
+
+    @Test
+    @DisplayName("Deve retonar uma lista vazia uma string nula")
+    void deveRetonarUmaListaVaziaUmaStringNula() {
+        final var listaDeStringSalvar = converter.convertToEntityAttribute(null);
+
+        Assertions.assertThat(listaDeStringSalvar)
+            .isNotNull()
+            .isEmpty();
+    }
+
+    @Test
+    @DisplayName("Deve retonar uma lista vazia uma string vazia")
+    void deveRetonarUmaListaVaziaUmaStringVazia() {
+        final var listaDeStringSalvar = converter.convertToEntityAttribute("");
+
+        Assertions.assertThat(listaDeStringSalvar)
+            .isNotNull()
+            .isEmpty();
     }
 }
