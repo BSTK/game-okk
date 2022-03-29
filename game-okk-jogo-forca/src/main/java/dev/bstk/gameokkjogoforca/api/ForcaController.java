@@ -2,7 +2,7 @@ package dev.bstk.gameokkjogoforca.api;
 
 import dev.bstk.gameokk.core.Mapper;
 import dev.bstk.gameokkjogoforca.api.response.PartidaResponse;
-import dev.bstk.gameokkjogoforca.domain.ForcaService;
+import dev.bstk.gameokkjogoforca.domain.service.ForcaService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

@@ -1,23 +1,20 @@
 package dev.bstk.gameokkjogoforca.domain.model;
 
-import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.hibernate.annotations.Type;
-import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 @Data
 @Entity
 @Table(name = "PARTIDA")
-@TypeDef(name = "json", typeClass = JsonBinaryType.class)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 public class Partida implements Serializable {
 
@@ -34,34 +31,31 @@ public class Partida implements Serializable {
     @NotNull
     @Column(name = "DATA_INSERT")
     @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime dataInsert;
+    private Date dataInsert;
 
     @NotNull
     @Column(name = "DATA_UPDATE")
     @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime dataUpdate;
+    private Date dataUpdate;
 
     @NotNull
     @NotEmpty
-    @Type(type = "json")
     @Column(name = "ALFABETO")
     private List<String> alfabeto;
 
     @NotNull
     @NotEmpty
-    @Type(type = "json")
     @Column(name = "LETRAS_CORRETAS")
     private List<String> letrasCorretas;
 
     @NotNull
     @NotEmpty
-    @Type(type = "json")
     @Column(name = "LETRAS_INCORRETAS")
     private List<String> letrasIncorretas;
 
     @NotNull
-    @Type(type = "json")
-    @Column(name = "PALAVRA_SECRETA")
+    @OneToOne
+    @JoinColumn(name = "PARTIDA_ID", referencedColumnName = "ID")
     private PalavraSecreta palavraSecreta;
 
     @NotNull
@@ -72,12 +66,12 @@ public class Partida implements Serializable {
     @PrePersist
     public void dataInsert() {
         setUuid(UUID.randomUUID());
-        setDataInsert(LocalDateTime.now());
-        setDataUpdate(LocalDateTime.now());
+        setDataInsert(Date.from(Instant.now()));
+        setDataUpdate(Date.from(Instant.now()));
     }
 
     @PreUpdate
     public void dataUpdate() {
-        setDataUpdate(LocalDateTime.now());
+        setDataUpdate(Date.from(Instant.now()));
     }
 }

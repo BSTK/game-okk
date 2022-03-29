@@ -1,4 +1,4 @@
-package dev.bstk.gameokkjogoforca.domain.factory;
+package dev.bstk.gameokkjogoforca.domain.service.factory;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.bstk.gameokkjogoforca.domain.model.Dica;
@@ -20,7 +20,7 @@ public class PalavraSecretaFactory {
     private PalavraSecretaFactory() { }
 
     public static PalavraSecreta palavra() {
-        final var palavraSecretas = carregarArquivoJsonComBancoDePalavrassecretas();
+        final var palavraSecretas = carregarArquivoJsonComBancoDePalavrasSecretas();
         final var totalPalavras = palavraSecretas.size();
         final var palavraSecretaIndex = SECURE_RANDOM.nextInt(totalPalavras);
 
@@ -33,12 +33,12 @@ public class PalavraSecretaFactory {
             .build();
     }
 
-    private static List<PalavraSecreta> carregarArquivoJsonComBancoDePalavrassecretas() {
+    private static List<PalavraSecreta> carregarArquivoJsonComBancoDePalavrasSecretas() {
         try {
             final var json = new File(RESOURCES_FORCA_PALAVRAS_SECRETAS);
-            final var palavraSecretas = JSON_MAPPER.readValue(json, PalavraSecreta[].class);
+            final var palavrasSecretas = JSON_MAPPER.readValue(json, PalavraSecreta[].class);
 
-            return Arrays.asList(palavraSecretas);
+            return Arrays.asList(palavrasSecretas);
         } catch (IOException ex) {
             throw new ArquivoNaoEncontradoException("Não foi possivél localizar o json!", ex);
         }

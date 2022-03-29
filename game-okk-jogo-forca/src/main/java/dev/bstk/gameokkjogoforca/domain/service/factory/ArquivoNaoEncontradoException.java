@@ -1,5 +1,5 @@
 
-package dev.bstk.gameokkjogoforca.domain.factory;
+package dev.bstk.gameokkjogoforca.domain.service.factory;
 
 public class ArquivoNaoEncontradoException extends RuntimeException {
 

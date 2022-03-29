@@ -1,8 +1,10 @@
-package dev.bstk.gameokkjogoforca.domain;
+package dev.bstk.gameokkjogoforca.domain.service;
 
-import dev.bstk.gameokkjogoforca.domain.factory.PartidaFactory;
 import dev.bstk.gameokkjogoforca.domain.model.Dica;
+import dev.bstk.gameokkjogoforca.domain.model.PalavraSecreta;
 import dev.bstk.gameokkjogoforca.domain.model.Partida;
+import dev.bstk.gameokkjogoforca.domain.repository.PartidaRepository;
+import dev.bstk.gameokkjogoforca.domain.service.factory.PartidaFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +25,7 @@ public class ForcaService {
         final var palavraSecretaMascarada = novaPartidaCriadaSalva.getPalavraSecreta();
         final var palavraMascarada = palavraSecretaMascarada.getPalavra()
             .stream()
-            .map(letra -> "▬")
+            .map(letra -> PalavraSecreta.CARACTERE_MASCARA)
             .collect(Collectors.toList());
 
         final var dicasVisiveis = palavraSecretaMascarada.getDicas()

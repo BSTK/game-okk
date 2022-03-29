@@ -1,4 +1,4 @@
-package dev.bstk.gameokkjogoforca.domain;
+package dev.bstk.gameokkjogoforca.domain.repository;
 
 import dev.bstk.gameokkjogoforca.domain.model.Partida;
 import org.springframework.data.jpa.repository.JpaRepository;

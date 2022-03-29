@@ -5,6 +5,8 @@ import dev.bstk.gameokk.core.exceptions.ArquivoFixtureNaoEncontradoException;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.Objects;
 
 public abstract class TesteHelper {

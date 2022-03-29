@@ -2,7 +2,7 @@ package dev.bstk.gameokkjogoforca.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.bstk.gameokk.core.TesteHelper;
-import dev.bstk.gameokkjogoforca.domain.ForcaService;
+import dev.bstk.gameokkjogoforca.domain.service.ForcaService;
 import dev.bstk.gameokkjogoforca.domain.model.Partida;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

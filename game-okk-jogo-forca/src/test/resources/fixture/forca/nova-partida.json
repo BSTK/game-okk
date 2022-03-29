@@ -1,11 +1,26 @@
 {
+  "id": 1,
+  "uuid": "723f9792-e2ec-4e68-a20e-4a68d898e630",
   "alfabeto": [
     "A","B","C","D","E","F","G","H","I","J","K","L","M",
     "N","O","P","Q","R","S","T","U","V","W","X","Y","Z"
   ],
   "palavraSecreta":  {
-    "palavra": [ "▬", "▬", "▬", "▬", "▬", "▬", "▬", "▬", "▬"],
-    "dicas": []
+    "palavra": [ "▬", "▬", "▬", "▬", "▬"],
+    "dicas": [
+      {
+        "numero": 1,
+        "descircao": "Um meio de locomoção e transporte"
+      },
+      {
+        "numero": 2,
+        "descircao": "Possui vários modelos e marcas"
+      },
+      {
+        "numero": 3,
+        "descircao": "Tem 4 rodas"
+      }
+    ]
   },
   "letrasCorretas":  [],
   "letrasIncorretas": []

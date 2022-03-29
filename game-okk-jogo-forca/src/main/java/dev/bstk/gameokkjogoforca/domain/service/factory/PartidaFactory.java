@@ -1,4 +1,4 @@
-package dev.bstk.gameokkjogoforca.domain.factory;
+package dev.bstk.gameokkjogoforca.domain.service.factory;
 
 import dev.bstk.gameokkjogoforca.domain.model.PalavraSecreta;
 import dev.bstk.gameokkjogoforca.domain.model.Partida;
