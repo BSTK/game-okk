@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -20,40 +21,66 @@ public class ForcaService {
 
     private final PartidaRepository partidaRepository;
 
-    public Partida partida(final UUID uuid) {
-        return partidaRepository
-            .obterPartidaEmAndamento(uuid)
+    public Partida partida(final UUID partidaId) {
+        final var partidaEmAndamento = partidaRepository
+            .obterPartidaEmAndamento(partidaId)
             .orElseThrow(() -> new IllegalArgumentException("Partida não encontrada!"));
+
+        return mascararPartida(partidaEmAndamento);
     }
 
     /// TODO: IMPLEMENTAR
-    public Partida jogar(final String letra, final Long partidaId) {
+    public Partida jogar(final String letra, final UUID partidaId) {
         log.info("jogar = Partida: [ {} ] | Letra: [ {} ]", partidaId, letra);
-        return PartidaFactory.partida();
+
+        final var partidaEmAndamento = partida(partidaId);
+        final var palavraSecreta = partidaEmAndamento.getPalavraSecreta();
+
+        if (palavraSecreta.getPalavra().contains(letra)) {
+            partidaEmAndamento.getLetrasCorretas().add(letra);
+        } else {
+            partidaEmAndamento.getLetrasIncorretas().add(letra);
+        }
+
+        return mascararPartida(partidaEmAndamento);
     }
 
     public Partida novaPartida() {
-        log.info("novaPartida()");
-
         final var novaPartidaCriada = PartidaFactory.partida();
         final var novaPartidaCriadaSalva = partidaRepository.save(novaPartidaCriada);
 
-        final var palavraSecretaMascarada = novaPartidaCriadaSalva.getPalavraSecreta();
-        final var palavraMascarada = palavraSecretaMascarada.getPalavra()
-            .stream()
-            .map(letra -> PalavraSecreta.CARACTERE_MASCARA)
-            .collect(Collectors.toList());
+        return mascararPartida(novaPartidaCriadaSalva);
+    }
+
+    /// TODO: MOSTAR AS LETRAS JA DESCOBERTAS
+    private Partida mascararPartida(final Partida partidaASerMascarada) {
+        final var palavraComLetrasDesmascaradas = new ArrayList<String>();
+        final var palavraSecretaMascarada = partidaASerMascarada.getPalavraSecreta();
+
+        if (!partidaASerMascarada.getLetrasCorretas().isEmpty()) {
+            for (String letraPalavra : palavraSecretaMascarada.getPalavra()) {
+                for (String letraCorreta : partidaASerMascarada.getLetrasCorretas()) {
+                    final var letraDesmascarada = (!letraPalavra.equalsIgnoreCase(letraCorreta))
+                        ? PalavraSecreta.CARACTERE_MASCARA
+                        : letraPalavra;
+
+                    palavraComLetrasDesmascaradas.add(letraDesmascarada);
+                }
+            }
+        } else {
+            palavraComLetrasDesmascaradas.addAll(palavraSecretaMascarada.getPalavra());
+        }
 
         final var dicasVisiveis = palavraSecretaMascarada.getDicas()
             .stream()
             .filter(Dica::isVisivel)
             .collect(Collectors.toList());
 
-        palavraSecretaMascarada.setPalavra(palavraMascarada);
         palavraSecretaMascarada.setDicas(dicasVisiveis);
+        palavraSecretaMascarada.setPalavra(palavraComLetrasDesmascaradas);
 
-        novaPartidaCriadaSalva.setPalavraSecreta(palavraSecretaMascarada);
+        partidaASerMascarada.setPalavraSecreta(palavraSecretaMascarada);
 
-        return novaPartidaCriadaSalva;
+        return partidaASerMascarada;
     }
 }

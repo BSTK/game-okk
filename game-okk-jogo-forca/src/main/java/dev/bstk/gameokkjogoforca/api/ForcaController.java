@@ -29,7 +29,7 @@ public class ForcaController {
 
     @PostMapping("/jogar/{partidaId}/{letra}")
     public ResponseEntity<PartidaResponse> jogar(@PathVariable("letra") final String letra,
-                                                 @PathVariable("partidaId") final Long partidaId) {
+                                                 @PathVariable("partidaId") final UUID partidaId) {
         final var partidaJogada = forcaService.jogar(letra, partidaId);
         final var partidaJogadaResponse = Mapper.to(partidaJogada, PartidaResponse.class);
 

@@ -4,8 +4,8 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.AttributeConverter;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class ListStringConverter implements AttributeConverter<List<String>, String> {
@@ -38,7 +38,7 @@ public class ListStringConverter implements AttributeConverter<List<String>, Str
     @Override
     public List<String> convertToEntityAttribute(final String dbData) {
         if (StringUtils.isEmpty(dbData)) {
-            return Collections.emptyList();
+            return new ArrayList<>();
         }
 
         String dbDataLimpo = dbData

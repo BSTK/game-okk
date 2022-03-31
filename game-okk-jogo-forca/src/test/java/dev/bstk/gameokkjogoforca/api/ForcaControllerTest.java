@@ -72,10 +72,10 @@ class ForcaControllerTest {
     @DisplayName("Deve efetuar uma jogada")
     void deveEfetuarUmaJogada() throws Exception {
         final var partidaresultadoJogada = TesteHelper.fixure("/fixture/forca/partida-em-andamento.json", Partida.class);
-        when(forcaService.jogar(anyString(), anyLong())).thenReturn(partidaresultadoJogada);
+        when(forcaService.jogar(anyString(), any(UUID.class))).thenReturn(partidaresultadoJogada);
 
         mockMvc.perform(
-                post(ENDPOINT_API_V1_JOGAR, 1L, "A")
+                post(ENDPOINT_API_V1_JOGAR, UUID.randomUUID(), "A")
                     .contentType(MediaType.APPLICATION_JSON))
             .andExpect(status().is2xxSuccessful());
     }

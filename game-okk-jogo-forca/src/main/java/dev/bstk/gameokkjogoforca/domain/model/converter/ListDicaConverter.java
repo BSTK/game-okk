@@ -7,8 +7,8 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.AttributeConverter;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class ListDicaConverter implements AttributeConverter<List<Dica>, String> {
@@ -28,6 +28,6 @@ public class ListDicaConverter implements AttributeConverter<List<Dica>, String>
     public List<Dica> convertToEntityAttribute(final String dbData) {
         return StringUtils.hasLength(dbData)
             ? Arrays.asList(OBJECT_MAPPER.readValue(dbData, Dica[].class))
-            : Collections.emptyList();
+            : new ArrayList<>();
     }
 }

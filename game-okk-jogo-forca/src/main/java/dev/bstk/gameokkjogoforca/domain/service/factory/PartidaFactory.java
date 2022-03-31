@@ -4,7 +4,7 @@ import dev.bstk.gameokkjogoforca.domain.model.PalavraSecreta;
 import dev.bstk.gameokkjogoforca.domain.model.Partida;
 import dev.bstk.gameokkjogoforca.domain.model.PartidaSatus;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PartidaFactory {
@@ -30,8 +30,8 @@ public class PartidaFactory {
             this.partida = new Partida();
             this.partida.setAlfabeto(ALFABETO);
             this.partida.setPalavraSecreta(PalavraSecretaFactory.palavra());
-            this.partida.setLetrasCorretas(Collections.emptyList());
-            this.partida.setLetrasIncorretas(Collections.emptyList());
+            this.partida.setLetrasCorretas(new ArrayList<>());
+            this.partida.setLetrasIncorretas(new ArrayList<>());
             this.partida.setStatus(PartidaSatus.EM_ANDAMENTO);
         }
 

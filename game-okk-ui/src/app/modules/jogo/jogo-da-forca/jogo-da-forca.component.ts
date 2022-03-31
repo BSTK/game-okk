@@ -19,8 +19,6 @@ export class JogoDaForcaComponent implements OnInit {
   ngOnInit(): void {
     const partidaId = this.activatedRoute.snapshot.paramMap.get('partidaId');
 
-    console.log('partidaId = ', partidaId);
-
     if (partidaId) {
       this.jogoDaForcaService
         .partida(partidaId)
@@ -33,11 +31,15 @@ export class JogoDaForcaComponent implements OnInit {
   }
 
   jogar(letra: string) {
-    this
-      .jogoDaForcaService
-      .jogar('1', letra)
-      .subscribe((partida: Partida) => {
-        this.partida = partida;
-      });
+    const partidaId = this.activatedRoute.snapshot.paramMap.get('partidaId');
+
+    if (partidaId) {
+      this
+        .jogoDaForcaService
+        .jogar(partidaId, letra)
+        .subscribe((partida: Partida) => {
+          this.partida = partida;
+        });
+    }
   }
 }
