@@ -12,7 +12,7 @@ import java.util.UUID;
 @Repository
 public interface PartidaRepository extends JpaRepository<Partida, Long> {
 
-    @Query("SELECT p FROM Partida p WHERE p.uuid = :uuid")
-    Optional<Partida> obterPartidaPorUuid(@Param("uuid") final UUID uuid);
+    @Query("SELECT p FROM Partida p WHERE p.uuid = :uuid AND p.status = 'EM_ANDAMENTO'")
+    Optional<Partida> obterPartidaEmAndamento(@Param("uuid") final UUID uuid);
 
 }

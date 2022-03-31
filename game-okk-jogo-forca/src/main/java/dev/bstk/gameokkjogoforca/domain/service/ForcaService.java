@@ -22,7 +22,7 @@ public class ForcaService {
 
     public Partida partida(final UUID uuid) {
         return partidaRepository
-            .obterPartidaPorUuid(uuid)
+            .obterPartidaEmAndamento(uuid)
             .orElseThrow(() -> new IllegalArgumentException("Partida não encontrada!"));
     }
 
