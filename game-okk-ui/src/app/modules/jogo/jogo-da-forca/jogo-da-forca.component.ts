@@ -10,8 +10,8 @@ import {JogoDaForcaService} from '../shared/service/jogo-da-forca.service';
 export class JogoDaForcaComponent implements OnInit {
 
   private contador = 0;
-  public assetForca: string = '/assets/jogo-da-forca/jf-asset-0.png'
   public partida: Partida = {} as Partida;
+  public assetForca: string = '/assets/jogo-da-forca/jf-asset-0.png'
 
   constructor(private readonly jogoDaForcaService: JogoDaForcaService) { }
 
@@ -33,6 +33,11 @@ export class JogoDaForcaComponent implements OnInit {
   }
 
   jogar(letra: string) {
-    console.log('Tem a letra?: ', letra);
+    this
+      .jogoDaForcaService
+      .jogar('1', letra)
+      .subscribe((partida: Partida) => {
+        this.partida = partida;
+      });
   }
 }

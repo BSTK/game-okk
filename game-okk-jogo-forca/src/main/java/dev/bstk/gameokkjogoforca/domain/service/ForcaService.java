@@ -6,10 +6,12 @@ import dev.bstk.gameokkjogoforca.domain.model.Partida;
 import dev.bstk.gameokkjogoforca.domain.repository.PartidaRepository;
 import dev.bstk.gameokkjogoforca.domain.service.factory.PartidaFactory;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ForcaService {
@@ -41,7 +43,6 @@ public class ForcaService {
         return novaPartidaCriadaSalva;
     }
 
-
     /// TODO: IMPLEMENTAR
     public Partida partida(final Long partidaId) {
         return PartidaFactory.partida();
@@ -49,6 +50,7 @@ public class ForcaService {
 
     /// TODO: IMPLEMENTAR
     public Partida jogar(final String letra, final Long partidaId) {
+        log.info("jogar = Partida: [ {} ] | Letra: [ {} ]", partidaId, letra);
         return PartidaFactory.partida();
     }
 }

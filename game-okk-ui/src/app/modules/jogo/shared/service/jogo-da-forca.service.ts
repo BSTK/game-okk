@@ -16,4 +16,12 @@ export class JogoDaForcaService {
       .httpClient
       .post<Partida>(Api.URLS.jogoDaForca.partida, {});
   }
+
+
+  public jogar(partidaId: string, letra: string): Observable<Partida> {
+    const url = `${Api.URLS.jogoDaForca.jogar}/${partidaId}/${letra}`;
+    return this
+      .httpClient
+      .post<Partida>(url, {});
+  }
 }
