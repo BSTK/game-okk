@@ -11,7 +11,7 @@ export class Api {
       }
     },
     jogoDaForca: {
-      partida: 'http://localhost:8082/game-okk-jogo-forca/api/v1/forca/partida'
+      partida: 'http://localhost:8082/game-okk-jogo-forca/api/v1/forca/nova-partida'
     }
   });
 

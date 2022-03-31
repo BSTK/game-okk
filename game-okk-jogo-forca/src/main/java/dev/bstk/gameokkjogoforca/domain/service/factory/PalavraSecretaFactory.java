@@ -3,8 +3,8 @@ package dev.bstk.gameokkjogoforca.domain.service.factory;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.bstk.gameokkjogoforca.domain.model.Dica;
 import dev.bstk.gameokkjogoforca.domain.model.PalavraSecreta;
+import org.springframework.core.io.ClassPathResource;
 
-import java.io.File;
 import java.io.IOException;
 import java.security.SecureRandom;
 import java.util.Arrays;
@@ -15,7 +15,7 @@ public class PalavraSecretaFactory {
 
     private static final ObjectMapper JSON_MAPPER = new ObjectMapper();
     private static final SecureRandom SECURE_RANDOM = new SecureRandom();
-    private static final String RESOURCES_FORCA_PALAVRAS_SECRETAS = "src/main/resources/forca/palavra-secreta.json";
+    private static final String RESOURCES_FORCA_PALAVRAS_SECRETAS = "/forca/palavra-secreta.json";
 
     private PalavraSecretaFactory() { }
 
@@ -35,7 +35,7 @@ public class PalavraSecretaFactory {
 
     private static List<PalavraSecreta> carregarArquivoJsonComBancoDePalavrasSecretas() {
         try {
-            final var json = new File(RESOURCES_FORCA_PALAVRAS_SECRETAS);
+            final var json = new ClassPathResource(RESOURCES_FORCA_PALAVRAS_SECRETAS).getFile();
             final var palavrasSecretas = JSON_MAPPER.readValue(json, PalavraSecreta[].class);
 
             return Arrays.asList(palavrasSecretas);

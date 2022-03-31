@@ -46,19 +46,17 @@ public class Partida implements Serializable {
     private List<String> alfabeto;
 
     @NotNull
-    @NotEmpty
     @Column(name = "LETRAS_CORRETAS")
     @Convert(converter = ListStringConverter.class)
     private List<String> letrasCorretas;
 
     @NotNull
-    @NotEmpty
     @Column(name = "LETRAS_INCORRETAS")
     @Convert(converter = ListStringConverter.class)
     private List<String> letrasIncorretas;
 
     @NotNull
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     @JoinColumn(name = "PARTIDA_ID", referencedColumnName = "ID")
     private PalavraSecreta palavraSecreta;
 

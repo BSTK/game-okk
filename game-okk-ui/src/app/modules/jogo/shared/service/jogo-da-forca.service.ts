@@ -14,6 +14,6 @@ export class JogoDaForcaService {
   public partida(): Observable<Partida> {
     return this
       .httpClient
-      .get<Partida>(Api.URLS.jogoDaForca.partida);
+      .post<Partida>(Api.URLS.jogoDaForca.partida, {});
   }
 }
