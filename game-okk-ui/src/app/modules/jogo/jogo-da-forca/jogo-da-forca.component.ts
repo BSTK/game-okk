@@ -20,7 +20,6 @@ export class JogoDaForcaComponent implements OnInit {
       .partida()
       .subscribe((partida: Partida) => {
         this.partida = partida;
-        console.log('this.partida = ', this.partida);
       });
   }
 
