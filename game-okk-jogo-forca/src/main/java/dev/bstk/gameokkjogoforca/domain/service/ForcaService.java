@@ -33,6 +33,8 @@ public class ForcaService {
     }
 
     public Partida novaPartida() {
+        log.info("novaPartida()");
+
         final var novaPartidaCriada = PartidaFactory.partida();
         final var novaPartidaCriadaSalva = partidaRepository.save(novaPartidaCriada);
 

@@ -11,12 +11,18 @@ export class JogoDaForcaService {
 
   constructor(private readonly httpClient: HttpClient) { }
 
-  public partida(): Observable<Partida> {
+  public novaPartida(): Observable<Partida> {
     return this
       .httpClient
-      .post<Partida>(Api.URLS.jogoDaForca.partida, {});
+      .post<Partida>(Api.URLS.jogoDaForca.novaPartida, {});
   }
 
+  public partida(partidaId: string): Observable<Partida> {
+    const url = `${Api.URLS.jogoDaForca.partida}/${partidaId}`;
+    return this
+      .httpClient
+      .get<Partida>(url);
+  }
 
   public jogar(partidaId: string, letra: string): Observable<Partida> {
     const url = `${Api.URLS.jogoDaForca.jogar}/${partidaId}/${letra}`;

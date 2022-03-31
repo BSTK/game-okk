@@ -1,7 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {HomeService} from '../../service/home.service';
 import {Jogo} from './jogo';
 import {Router} from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {HomeService} from '../../service/home.service';
+import {Partida} from '../../../jogo/shared/model/jogo-da-forca';
+import {JogoDaForcaService} from '../../../jogo/shared/service/jogo-da-forca.service';
 
 @Component({
   selector: 'app-home',
@@ -10,9 +12,13 @@ import {Router} from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
+  private readonly JOGO_DA_FORCA = 'jogo-da-forca';
+
   public jogos: Jogo[] = [];
 
-  constructor(private readonly homeService: HomeService, private readonly router: Router) { }
+  constructor(private readonly router: Router,
+              private readonly homeService: HomeService,
+              private readonly jogoDaForcaService: JogoDaForcaService) { }
 
   ngOnInit(): void {
     this.homeService
@@ -25,19 +31,12 @@ export class HomeComponent implements OnInit {
   }
 
   public jogarPartida(contexto: string) {
-    console.log('contexto = ', contexto);
-
-    /// TODO: CHAMA SERVIÇO DO JOGO PARA CRIAR UMA NOVA PARTIDA
-    /// TODO: this.router.navigate(['contexto/ID_DA_PARTIDA']);
-
-    /// TODO: MATEMATICA PLAY
-    /// this.router.navigateByUrl('/matematica-play/1234');
-
-    /// TODO: JOGO DA VELHA
-    /// this.router.navigateByUrl('/jogo-da-velha/1234');
-
-    /// TODO: JOGO DA FORCA
-    this.router.navigateByUrl('/jogo-da-forca/1234');
+    if (contexto === this.JOGO_DA_FORCA) {
+      this.jogoDaForcaService
+        .novaPartida()
+        .subscribe((partida: Partida) => {
+          this.router.navigateByUrl(`/jogo-da-forca/${partida.uuid}`);
+        });
+    }
   }
-
 }

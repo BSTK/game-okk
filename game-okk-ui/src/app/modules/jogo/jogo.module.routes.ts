@@ -1,6 +1,6 @@
 import {Routes} from '@angular/router';
-import {MatematicaPlayComponent} from './matematica-play/matematica-play.component';
 import {JogoDaForcaComponent} from './jogo-da-forca/jogo-da-forca.component';
+import {MatematicaPlayComponent} from './matematica-play/matematica-play.component';
 
 export const JOGO_ROUTES: Routes = [
   {

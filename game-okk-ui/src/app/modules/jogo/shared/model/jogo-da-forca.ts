@@ -1,16 +1,17 @@
-export interface Partida {
+export type Partida = {
+  uuid: string;
   alfabeto: string[];
   palavraSecreta: PalavraSecreta;
   letrasCorretas: string[];
   letrasIncorretas: string[];
 }
 
-export interface PalavraSecreta {
+export type PalavraSecreta = {
   palavra: string[];
   dicas: Dica[]
 }
 
-export interface Dica {
+export type Dica = {
   numero: number;
   descricao: string;
 }

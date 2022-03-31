@@ -5,13 +5,13 @@
 
   <div class="col-md-9">
     <div class="row mb-5 justify-content-center">
-      <div *ngFor="let letra of partida.palavraSecreta.palavra" class="card col-1 p-1 m-2 rounded-3 border-1">
+      <div *ngFor="let letra of partida?.palavraSecreta?.palavra" class="card col-1 p-1 m-2 rounded-3 border-1">
         <h1>{{ letra }}</h1>
       </div>
     </div>
 
     <div class="row mt-5 justify-content-center">
-      <div *ngFor="let letra of partida.alfabeto"
+      <div *ngFor="let letra of partida?.alfabeto"
            (click)="jogar(letra)"
            class="card col-1 p-2 m-2 rounded-3 shadow-sm border-1 botao-letra-alfabeto">
         {{ letra }}
@@ -25,7 +25,5 @@
         <li class="list-group-item"><i class="fa fa-solid fa-lightbulb-on"></i> Estado da região Nordeste</li>
       </ul>
     </div>
-
-    <button (click)="ok()">OK</button>
   </div>
 </div>

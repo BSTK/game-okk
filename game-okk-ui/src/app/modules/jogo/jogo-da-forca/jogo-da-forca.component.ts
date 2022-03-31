@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Partida} from '../shared/model/jogo-da-forca';
 import {JogoDaForcaService} from '../shared/service/jogo-da-forca.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-jogo-da-forca',
@@ -9,27 +10,26 @@ import {JogoDaForcaService} from '../shared/service/jogo-da-forca.service';
 })
 export class JogoDaForcaComponent implements OnInit {
 
-  private contador = 0;
   public partida: Partida = {} as Partida;
   public assetForca: string = '/assets/jogo-da-forca/jf-asset-0.png'
 
-  constructor(private readonly jogoDaForcaService: JogoDaForcaService) { }
+  constructor(private readonly activatedRoute: ActivatedRoute,
+              private readonly jogoDaForcaService: JogoDaForcaService) { }
 
   ngOnInit(): void {
-    this.jogoDaForcaService
-      .partida()
-      .subscribe((partida: Partida) => {
-        this.partida = partida;
-      });
-  }
+    const partidaId = this.activatedRoute.snapshot.paramMap.get('partidaId');
 
-  ok() {
-    this.assetForca = `/assets/jogo-da-forca/jf-asset-${this.contador}.png`
-    this.contador++;
+    console.log('partidaId = ', partidaId);
 
-    if (this.contador == 7) {
-      this.contador = 0;
+    if (partidaId) {
+      this.jogoDaForcaService
+        .partida(partidaId)
+        .subscribe((partida: Partida) => {
+          this.partida = partida;
+        });
     }
+
+    /// TODO: CASO A PARTIDA NÃO SEJA ENCONTRADA! VOLTAR PARA TELA ANTERIOR!!
   }
 
   jogar(letra: string) {
