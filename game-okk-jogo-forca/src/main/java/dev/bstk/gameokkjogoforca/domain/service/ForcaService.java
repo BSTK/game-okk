@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -19,6 +20,17 @@ public class ForcaService {
 
     private final PartidaRepository partidaRepository;
 
+    public Partida partida(final UUID uuid) {
+        return partidaRepository
+            .obterPartidaPorUuid(uuid)
+            .orElseThrow(() -> new IllegalArgumentException("Partida não encontrada!"));
+    }
+
+    /// TODO: IMPLEMENTAR
+    public Partida jogar(final String letra, final Long partidaId) {
+        log.info("jogar = Partida: [ {} ] | Letra: [ {} ]", partidaId, letra);
+        return PartidaFactory.partida();
+    }
 
     public Partida novaPartida() {
         final var novaPartidaCriada = PartidaFactory.partida();
@@ -41,16 +53,5 @@ public class ForcaService {
         novaPartidaCriadaSalva.setPalavraSecreta(palavraSecretaMascarada);
 
         return novaPartidaCriadaSalva;
-    }
-
-    /// TODO: IMPLEMENTAR
-    public Partida partida(final Long partidaId) {
-        return PartidaFactory.partida();
-    }
-
-    /// TODO: IMPLEMENTAR
-    public Partida jogar(final String letra, final Long partidaId) {
-        log.info("jogar = Partida: [ {} ] | Letra: [ {} ]", partidaId, letra);
-        return PartidaFactory.partida();
     }
 }

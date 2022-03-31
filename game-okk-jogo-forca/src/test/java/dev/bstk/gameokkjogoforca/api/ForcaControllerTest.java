@@ -2,8 +2,8 @@ package dev.bstk.gameokkjogoforca.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.bstk.gameokk.core.TesteHelper;
-import dev.bstk.gameokkjogoforca.domain.service.ForcaService;
 import dev.bstk.gameokkjogoforca.domain.model.Partida;
+import dev.bstk.gameokkjogoforca.domain.service.ForcaService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,8 +14,9 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.ArgumentMatchers.anyString;
+import java.util.UUID;
+
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -42,10 +43,10 @@ class ForcaControllerTest {
     @DisplayName("Deve retornar uma partida por id valida")
     void deveRetornarUmaPartidaPorIdValida() throws Exception {
         final var partidaPorId = TesteHelper.fixure("/fixture/forca/partida-em-andamento.json", Partida.class);
-        when(forcaService.partida(anyLong())).thenReturn(partidaPorId);
+        when(forcaService.partida(any(UUID.class))).thenReturn(partidaPorId);
 
         mockMvc.perform(
-                get(ENDPOINT_API_V1_PARTIDA_POR_ID, 1L))
+                get(ENDPOINT_API_V1_PARTIDA_POR_ID, UUID.randomUUID()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.alfabeto").value(partidaPorId.getAlfabeto()))

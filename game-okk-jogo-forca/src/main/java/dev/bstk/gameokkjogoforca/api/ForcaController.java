@@ -8,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @Slf4j
 @RestController
 @RequiredArgsConstructor
@@ -18,7 +20,7 @@ public class ForcaController {
     private final ForcaService forcaService;
 
     @GetMapping("/partida/{partidaId}")
-    public ResponseEntity<PartidaResponse> partida(@PathVariable("partidaId") final Long partidaId) {
+    public ResponseEntity<PartidaResponse> partida(@PathVariable("partidaId") final UUID partidaId) {
         final var partida = forcaService.partida(partidaId);
         final var partidaResponse = Mapper.to(partida, PartidaResponse.class);
 
