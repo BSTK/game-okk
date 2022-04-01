@@ -76,4 +76,8 @@ public class Partida implements Serializable {
     public void dataUpdate() {
         setDataUpdate(Date.from(Instant.now()));
     }
+
+    public boolean acertouLetra(final String letra) {
+        return getLetrasCorretas().contains(letra);
+    }
 }

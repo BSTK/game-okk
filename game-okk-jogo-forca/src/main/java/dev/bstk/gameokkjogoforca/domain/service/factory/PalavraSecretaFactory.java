@@ -7,8 +7,8 @@ import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
 import java.security.SecureRandom;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class PalavraSecretaFactory {
@@ -50,8 +50,8 @@ public class PalavraSecretaFactory {
 
         public PalavraSecretaBuilder() {
             this.palavra = new PalavraSecreta();
-            this.palavra.setPalavra(Collections.emptyList());
-            this.palavra.setDicas(Collections.emptyList());
+            this.palavra.setPalavra(new ArrayList<>());
+            this.palavra.setDicas(new ArrayList<>());
         }
 
         public static PalavraSecretaBuilder builder() {
