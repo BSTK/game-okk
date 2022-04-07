@@ -11,7 +11,10 @@ import {ActivatedRoute} from '@angular/router';
 export class JogoDaForcaComponent implements OnInit {
 
   public partida: Partida = {} as Partida;
-  public assetForca: string = '/assets/jogo-da-forca/jf-asset-0.png'
+  public assetForca: string = '/assets/jogo-da-forca/jf-asset-0.png';
+
+  private readonly cssErrouJogada = 'botao-jogado botao-jogado-errou';
+  private readonly cssAcertouJogada = 'botao-jogado botao-jogado-acertou';
 
   constructor(private readonly activatedRoute: ActivatedRoute,
               private readonly jogoDaForcaService: JogoDaForcaService) { }
@@ -41,5 +44,11 @@ export class JogoDaForcaComponent implements OnInit {
           this.partida = partida;
         });
     }
+  }
+
+  cssJogada(letra: string): string {
+    if (this.partida.letrasCorretas.includes(letra)) { return this.cssAcertouJogada; }
+    if (this.partida.letrasIncorretas.includes(letra)) { return this.cssErrouJogada; }
+    return '';
   }
 }

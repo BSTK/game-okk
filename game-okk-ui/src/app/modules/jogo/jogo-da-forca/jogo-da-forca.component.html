@@ -13,7 +13,8 @@
     <div class="row mt-5 justify-content-center">
       <div *ngFor="let letra of partida?.alfabeto"
            (click)="jogar(letra)"
-           class="card col-1 p-2 m-2 rounded-3 shadow-sm border-1 botao-letra-alfabeto">
+           class="card col-1 p-2 m-2 rounded-3 shadow-sm border-1 botao-letra-alfabeto"
+           [ngClass]="cssJogada(letra)">
         {{ letra }}
       </div>
     </div>

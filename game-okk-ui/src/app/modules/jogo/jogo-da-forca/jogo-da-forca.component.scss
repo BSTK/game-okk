@@ -11,3 +11,18 @@ img {
 .botao-letra-alfabeto {
   cursor: pointer;
 }
+
+.botao-jogado {
+  color: #fff;
+  opacity: 0.4;
+  font-weight: bold;
+  pointer-events: none;
+}
+
+.botao-jogado-acertou {
+  background: #00A884;
+}
+
+.botao-jogado-errou {
+  background: #d00202;
+}
