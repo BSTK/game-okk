@@ -4,9 +4,9 @@
     "N","O","P","Q","R","S","T","U","V","W","X","Y","Z"
   ],
   "palavraSecreta":  {
-    "palavra": [ "▬", "▬", "▬", "▬", "▬", "▬", "▬", "▬", "▬"],
+    "palavra": [ "C", "▬", "R", "R", "▬"],
     "dicas": []
   },
-  "letrasCorretas":  [],
-  "letrasIncorretas": []
+  "letrasCorretas":  ["C", "R"],
+  "letrasIncorretas": ["Z", "D"]
 }

@@ -13,6 +13,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Collections;
 
+import static dev.bstk.gameokkjogoforca.domain.model.PalavraSecreta.MASCARA;
+
 @ExtendWith(MockitoExtension.class)
 class EsconderLetraServiceTest {
 
@@ -37,7 +39,33 @@ class EsconderLetraServiceTest {
         Assertions.assertThat(palavraSecreta.getPalavra())
             .isNotNull()
             .isNotEmpty()
-            .containsExactlyElementsOf(Collections.nCopies(palavraSecreta.getPalavra().size(), PalavraSecreta.CARACTERE_MASCARA));
+            .containsExactlyElementsOf(Collections.nCopies(palavraSecreta.getPalavra().size(), MASCARA));
+
+        Assertions.assertThat(palavraSecreta.getDicas())
+            .isNotNull()
+            .isEmpty();
+    }
+
+    @Test
+    @DisplayName("Deve escoder todas letras que ainda não foram descobertas")
+    void deveEscoderTodasLetrasQueAindaNaoForamDescobertas() {
+        final var partidaEmAndamento = TesteHelper.fixure("/fixture/forca/partida-em-andamento.json", Partida.class);
+
+        Partida partidaEmAndamentoComLetrasEscondidas = esconderLetraService.esconder(partidaEmAndamento);
+
+        Assertions.assertThat(partidaEmAndamentoComLetrasEscondidas)
+            .isNotNull();
+
+        PalavraSecreta palavraSecreta = partidaEmAndamentoComLetrasEscondidas.getPalavraSecreta();
+
+        Assertions.assertThat(palavraSecreta)
+            .isNotNull();
+
+        Assertions.assertThat(palavraSecreta.getPalavra())
+            .isNotNull()
+            .isNotEmpty()
+            .contains("▬")
+            .contains("C", "R");
 
         Assertions.assertThat(palavraSecreta.getDicas())
             .isNotNull()

@@ -5,6 +5,7 @@ import org.springframework.util.StringUtils;
 
 import javax.persistence.AttributeConverter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ListStringConverter implements AttributeConverter<List<String>, String> {
@@ -45,11 +46,6 @@ public class ListStringConverter implements AttributeConverter<List<String>, Str
             .replace(STRING_COLCHETE_FIM, STRING_EMPTY)
             .replace(STRING_ASPAS_DUPLAS, STRING_EMPTY);
 
-        final var dadoConvertido = new ArrayList<String>();
-        for (String s : dbDataLimpo.split(DELIMITER)) {
-            dadoConvertido.add(s);
-        }
-
-        return dadoConvertido;
+        return new ArrayList<>(Arrays.asList(dbDataLimpo.split(DELIMITER)));
     }
 }

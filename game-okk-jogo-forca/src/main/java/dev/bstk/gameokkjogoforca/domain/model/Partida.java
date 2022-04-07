@@ -77,7 +77,18 @@ public class Partida implements Serializable {
         setDataUpdate(Date.from(Instant.now()));
     }
 
+    /// TODO: REFATORAR PARA UM NOME MAIS DESCRITIVO E CORRETO
     public boolean acertouLetra(final String letra) {
         return getLetrasCorretas().contains(letra);
+    }
+
+    /// TODO: REFATORAR PARA UM NOME MAIS DESCRITIVO E CORRETO
+    public boolean errouLetra(final String letra) {
+        return !acertouLetra(letra);
+    }
+
+    public boolean inicioDePartida() {
+        return getLetrasCorretas().isEmpty()
+            && getLetrasIncorretas().isEmpty();
     }
 }

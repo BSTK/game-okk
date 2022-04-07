@@ -17,7 +17,7 @@ import java.util.List;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 public class PalavraSecreta implements Serializable {
 
-    public static final String CARACTERE_MASCARA = "▬";
+    public static final String MASCARA = "▬";
 
     @Id
     @Column(name = "ID")

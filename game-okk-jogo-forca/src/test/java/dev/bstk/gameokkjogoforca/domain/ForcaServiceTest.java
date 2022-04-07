@@ -50,7 +50,7 @@ class ForcaServiceTest {
         Assertions.assertThat(palavraSecreta.getPalavra())
             .isNotNull()
             .isNotEmpty()
-            .containsExactlyElementsOf(Collections.nCopies(palavraSecreta.getPalavra().size(), PalavraSecreta.CARACTERE_MASCARA));
+            .containsExactlyElementsOf(Collections.nCopies(palavraSecreta.getPalavra().size(), PalavraSecreta.MASCARA));
 
         Assertions.assertThat(palavraSecreta.getDicas())
             .isNotNull()

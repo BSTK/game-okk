@@ -5,16 +5,8 @@ import dev.bstk.gameokkjogoforca.domain.repository.PartidaRepository;
 import dev.bstk.gameokkjogoforca.domain.service.factory.PartidaFactory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URI;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.util.UUID;
 
 @Slf4j
@@ -27,9 +19,7 @@ public class ForcaService {
 
 
     public Partida partida(final UUID partidaId) {
-        log.info("partida() =  [ {} ]", partidaId);
         final var partidaEmAndamento = partidaEmAndamento(partidaId);
-
         return esconderLetraService.esconder(partidaEmAndamento);
     }
 
@@ -46,13 +36,10 @@ public class ForcaService {
         }
 
         final var partidaEmAndamentoSalva = partidaRepository.save(partidaEmAndamento);
-        
         return esconderLetraService.esconder(partidaEmAndamentoSalva);
     }
 
     public Partida novaPartida() {
-        log.info("novaPartida()");
-
         final var novaPartidaCriada = PartidaFactory.partida();
         final var novaPartidaCriadaSalva = partidaRepository.save(novaPartidaCriada);
 

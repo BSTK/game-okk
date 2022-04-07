@@ -1,12 +1,13 @@
 package dev.bstk.gameokkjogoforca.domain.service;
 
 import dev.bstk.gameokkjogoforca.domain.model.Dica;
-import dev.bstk.gameokkjogoforca.domain.model.PalavraSecreta;
 import dev.bstk.gameokkjogoforca.domain.model.Partida;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
+
+import static dev.bstk.gameokkjogoforca.domain.model.PalavraSecreta.MASCARA;
 
 @Component
 public class EsconderLetraService {
@@ -15,8 +16,8 @@ public class EsconderLetraService {
     public Partida esconder(final Partida partida) {
         final var palavraSecretaMascarada = partida.getPalavraSecreta();
 
-        if (inicioDePartida(partida)) {
-            esconderTodasLetras(palavraSecretaMascarada);
+        if (partida.inicioDePartida()) {
+            esconderTodasLetras(partida);
         } else {
             esconderTodasLetrasNaoDescobertas(partida);
         }
@@ -31,31 +32,29 @@ public class EsconderLetraService {
         return partida;
     }
 
-    public void esconderTodasLetras(final PalavraSecreta palavraSecreta) {
-        final var palavraEscondida = palavraSecreta.getPalavra()
+    private void esconderTodasLetras(final Partida partida) {
+        final var palavraEscondida = partida
+            .getPalavraSecreta()
+            .getPalavra()
             .stream()
-            .map(letra -> PalavraSecreta.CARACTERE_MASCARA)
+            .map(letra -> MASCARA)
             .collect(Collectors.toList());
 
-        palavraSecreta.setPalavra(palavraEscondida);
+        partida
+            .getPalavraSecreta()
+            .setPalavra(palavraEscondida);
     }
 
-    public void esconderTodasLetrasNaoDescobertas(final Partida partida) {
+    private void esconderTodasLetrasNaoDescobertas(final Partida partida) {
         final var palavraComLetrasEscondidas = new ArrayList<String>();
 
         for (String letra : partida.getPalavraSecreta().getPalavra()) {
-            final var letraDesmascarada = partida.acertouLetra(letra)
-                ? letra
-                : PalavraSecreta.CARACTERE_MASCARA;
-
+            final var letraDesmascarada = partida.errouLetra(letra) ? MASCARA : letra;
             palavraComLetrasEscondidas.add(letraDesmascarada);
         }
 
-        partida.getPalavraSecreta().setPalavra(palavraComLetrasEscondidas);
-    }
-
-    private boolean inicioDePartida(final Partida partida) {
-        return partida.getLetrasCorretas().isEmpty()
-            && partida.getLetrasIncorretas().isEmpty();
+        partida
+            .getPalavraSecreta()
+            .setPalavra(palavraComLetrasEscondidas);
     }
 }
