@@ -33,6 +33,7 @@ public class ForcaService {
             partidaEmAndamento.getLetrasCorretas().add(letra);
         } else {
             partidaEmAndamento.getLetrasIncorretas().add(letra);
+            partidaEmAndamento.incrementarTotalErros();
         }
 
         final var partidaEmAndamentoSalva = partidaRepository.save(partidaEmAndamento);

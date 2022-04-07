@@ -65,8 +65,13 @@ public class Partida implements Serializable {
     @Enumerated(EnumType.STRING)
     private PartidaSatus status;
 
+    @NotNull
+    @Column(name = "TOTAL_ERROS")
+    private int totalErros;
+
     @PrePersist
     public void dataInsert() {
+        setTotalErros(0);
         setUuid(UUID.randomUUID());
         setDataInsert(Date.from(Instant.now()));
         setDataUpdate(Date.from(Instant.now()));
@@ -85,6 +90,10 @@ public class Partida implements Serializable {
     /// TODO: REFATORAR PARA UM NOME MAIS DESCRITIVO E CORRETO
     public boolean errouLetra(final String letra) {
         return !acertouLetra(letra);
+    }
+
+    public void incrementarTotalErros() {
+        this.totalErros += 1;
     }
 
     public boolean inicioDePartida() {

@@ -4,6 +4,7 @@ export type Partida = {
   palavraSecreta: PalavraSecreta;
   letrasCorretas: string[];
   letrasIncorretas: string[];
+  totalErros: number;
 }
 
 export type PalavraSecreta = {

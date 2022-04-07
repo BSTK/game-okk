@@ -26,7 +26,7 @@ export class JogoDaForcaComponent implements OnInit {
       this.jogoDaForcaService
         .partida(partidaId)
         .subscribe((partida: Partida) => {
-          this.partida = partida;
+          this.atualizaPartida(partida);
         });
     }
 
@@ -41,7 +41,7 @@ export class JogoDaForcaComponent implements OnInit {
         .jogoDaForcaService
         .jogar(partidaId, letra)
         .subscribe((partida: Partida) => {
-          this.partida = partida;
+          this.atualizaPartida(partida);
         });
     }
   }
@@ -50,5 +50,10 @@ export class JogoDaForcaComponent implements OnInit {
     if (this.partida.letrasCorretas.includes(letra)) { return this.cssAcertouJogada; }
     if (this.partida.letrasIncorretas.includes(letra)) { return this.cssErrouJogada; }
     return '';
+  }
+
+  private atualizaPartida(partida: Partida) {
+    this.partida = partida;
+    this.assetForca = `/assets/jogo-da-forca/jf-asset-${partida.totalErros}.png`;
   }
 }

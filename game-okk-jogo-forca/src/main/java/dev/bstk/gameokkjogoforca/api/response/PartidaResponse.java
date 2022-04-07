@@ -10,6 +10,7 @@ import java.util.UUID;
 public class PartidaResponse implements Serializable {
 
     private UUID uuid;
+    private Integer totalErros;
     private List<String> alfabeto;
     private List<String> letrasCorretas;
     private List<String> letrasIncorretas;
