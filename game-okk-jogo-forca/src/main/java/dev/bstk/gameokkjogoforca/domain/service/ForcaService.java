@@ -7,8 +7,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.Objects;
 import java.util.UUID;
+
+import static dev.bstk.gameokkjogoforca.domain.model.PalavraSecreta.MASCARA;
+import static dev.bstk.gameokkjogoforca.domain.model.PalavraSecreta.TOTAL_ERROS;
 
 @Slf4j
 @Service
@@ -37,10 +39,13 @@ public class ForcaService {
             partidaEmAndamento.incrementarTotalErros();
         }
 
-        final var terminouPartidaPerdeu = partidaEmAndamento.getTotalErros() == 6;
-        final var terminouPartidaGanhou = Objects.equals(
-            partidaEmAndamento.getPalavraSecreta().getPalavra(),
-            partidaEmAndamento.getLetrasCorretas());
+        final var partidaValidaGanhouPerdeu = esconderLetraService.esconder(partidaEmAndamento);
+
+        final var terminouPartidaPerdeu = partidaValidaGanhouPerdeu.getTotalErros() == TOTAL_ERROS;
+        final var terminouPartidaGanhou = partidaValidaGanhouPerdeu
+            .getPalavraSecreta()
+            .getPalavra()
+            .contains(MASCARA);
 
         partidaEmAndamento.setTerminouPartidaPerdeu(terminouPartidaPerdeu);
         partidaEmAndamento.setTerminouPartidaGanhou(terminouPartidaGanhou);

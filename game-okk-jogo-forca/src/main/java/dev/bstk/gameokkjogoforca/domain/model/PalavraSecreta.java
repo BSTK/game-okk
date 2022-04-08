@@ -18,6 +18,7 @@ import java.util.List;
 public class PalavraSecreta implements Serializable {
 
     public static final String MASCARA = "▬";
+    public static final Integer TOTAL_ERROS = 6;
 
     @Id
     @Column(name = "ID")
