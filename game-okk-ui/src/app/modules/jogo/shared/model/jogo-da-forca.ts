@@ -5,6 +5,8 @@ export type Partida = {
   letrasCorretas: string[];
   letrasIncorretas: string[];
   totalErros: number;
+  terminouPartidaGanhou: boolean;
+  terminouPartidaPerdeu: boolean;
 }
 
 export type PalavraSecreta = {

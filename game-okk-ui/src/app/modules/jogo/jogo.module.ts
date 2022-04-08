@@ -5,6 +5,7 @@ import {CommonModule} from '@angular/common';
 import {JOGO_ROUTES} from './jogo.module.routes';
 import {MatematicaPlayComponent} from './matematica-play/matematica-play.component';
 import {JogoDaForcaComponent} from './jogo-da-forca/jogo-da-forca.component';
+import {CoreModule} from '../../core/core.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import {JogoDaForcaComponent} from './jogo-da-forca/jogo-da-forca.component';
   imports: [
     FormsModule,
     CommonModule,
-    RouterModule.forChild(JOGO_ROUTES)
+    RouterModule.forChild(JOGO_ROUTES),
+    CoreModule
   ]
 })
 export class JogoModule { }

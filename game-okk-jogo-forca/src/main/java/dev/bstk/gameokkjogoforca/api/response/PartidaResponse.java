@@ -15,4 +15,6 @@ public class PartidaResponse implements Serializable {
     private List<String> letrasCorretas;
     private List<String> letrasIncorretas;
     private PalavraSecretaResponse palavraSecreta;
+    private boolean terminouPartidaGanhou;
+    private boolean terminouPartidaPerdeu;
 }

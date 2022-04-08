@@ -69,10 +69,20 @@ public class Partida implements Serializable {
     @Column(name = "TOTAL_ERROS")
     private int totalErros;
 
+    @NotNull
+    @Column(name = "TERMINOU_PARTIDA_GANHOU")
+    private boolean terminouPartidaGanhou;
+
+    @NotNull
+    @Column(name = "TERMINOU_PARTIDA_PERDEU")
+    private boolean terminouPartidaPerdeu;
+
     @PrePersist
     public void dataInsert() {
         setTotalErros(0);
         setUuid(UUID.randomUUID());
+        setTerminouPartidaGanhou(false);
+        setTerminouPartidaPerdeu(false);
         setDataInsert(Date.from(Instant.now()));
         setDataUpdate(Date.from(Instant.now()));
     }
