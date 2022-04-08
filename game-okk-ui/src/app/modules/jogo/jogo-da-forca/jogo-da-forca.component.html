@@ -1,5 +1,4 @@
 <div class="row text-center">
-  <app-alert #alertCompent></app-alert>
   <div class="col-md-3">
     <img [src]="assetForca" class="rounded img-fluid mx-auto" alt="Asset 0">
   </div>
@@ -29,3 +28,9 @@
     </div>
   </div>
 </div>
+<app-alert #alertCompent
+           [hidden]="alertCompentHidden"
+           [titulo]="alertTipo.titulo"
+           [modalCss]="alertTipo.modalCss"
+           [descricao]="alertTipo.descricao">
+</app-alert>

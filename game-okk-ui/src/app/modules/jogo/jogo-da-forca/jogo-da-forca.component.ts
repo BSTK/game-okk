@@ -1,8 +1,9 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Partida} from '../shared/model/jogo-da-forca';
-import {JogoDaForcaService} from '../shared/service/jogo-da-forca.service';
-import {ActivatedRoute} from '@angular/router';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {AlertComponent} from '../../../core/alert/alert.component';
+import {JogoDaForcaService} from '../shared/service/jogo-da-forca.service';
+import {alertGanhou, alertPerdeu, AlertTipo} from '../../../core/alert/alert-tipo';
 
 @Component({
   selector: 'app-jogo-da-forca',
@@ -12,6 +13,7 @@ import {AlertComponent} from '../../../core/alert/alert.component';
 export class JogoDaForcaComponent implements OnInit {
 
   public partida: Partida = {} as Partida;
+  public alertTipo: AlertTipo = {} as AlertTipo;
   public assetForca: string = '/assets/jogo-da-forca/jf-asset-0.png';
 
   @ViewChild('alertCompent')
@@ -21,7 +23,8 @@ export class JogoDaForcaComponent implements OnInit {
   private readonly cssErrouJogada = 'botao-jogado botao-jogado-errou';
   private readonly cssAcertouJogada = 'botao-jogado botao-jogado-acertou';
 
-  constructor(private readonly activatedRoute: ActivatedRoute,
+  constructor(private readonly router: Router,
+              private readonly activatedRoute: ActivatedRoute,
               private readonly jogoDaForcaService: JogoDaForcaService) { }
 
   ngOnInit(): void {
@@ -53,6 +56,7 @@ export class JogoDaForcaComponent implements OnInit {
   }
 
   cssJogada(letra: string): string {
+    console.log('cssJogada : ', letra);
     if (this.partida.letrasCorretas.includes(letra)) { return this.cssAcertouJogada; }
     if (this.partida.letrasIncorretas.includes(letra)) { return this.cssErrouJogada; }
     return '';
@@ -64,19 +68,30 @@ export class JogoDaForcaComponent implements OnInit {
   }
 
   private atualizarGanhouPerdeu(partida: Partida) {
-    if (/*partida.terminouPartidaGanhou
-      && */this.alertCompent
+    this.alertCompentHidden = true;
+    if (partida.terminouPartidaGanhou
+      && this.alertCompent
       && this.alertCompent.hrefModal) {
-      this.alertCompentHidden = true;
+      this.alertTipo = alertGanhou;
       this.alertCompent.hrefModal?.nativeElement.click();
-      /// TODO: INICIA UMA NOVA PARTIDA
+      this.iniciarNovaPartida();
     }
 
-    if (/*partida.terminouPartidaPerdeu
-      && */this.alertCompent
+    if (partida.terminouPartidaPerdeu
+      && this.alertCompent
       && this.alertCompent.hrefModal) {
+      this.alertTipo = alertPerdeu;
       this.alertCompent.hrefModal?.nativeElement.click();
-      /// TODO: INICIA UMA NOVA PARTIDA
+      this.iniciarNovaPartida();
     }
+  }
+
+  private iniciarNovaPartida() {
+    this.alertCompentHidden = false;
+    this.jogoDaForcaService
+      .novaPartida()
+      .subscribe((partida: Partida) => {
+        this.atualizaPartida(partida);
+      });
   }
 }

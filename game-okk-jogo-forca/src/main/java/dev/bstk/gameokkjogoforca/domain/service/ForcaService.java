@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
 import java.util.UUID;
 
 @Slf4j
@@ -35,6 +36,14 @@ public class ForcaService {
             partidaEmAndamento.getLetrasIncorretas().add(letra);
             partidaEmAndamento.incrementarTotalErros();
         }
+
+        final var terminouPartidaPerdeu = partidaEmAndamento.getTotalErros() == 6;
+        final var terminouPartidaGanhou = Objects.equals(
+            partidaEmAndamento.getPalavraSecreta().getPalavra(),
+            partidaEmAndamento.getLetrasCorretas());
+
+        partidaEmAndamento.setTerminouPartidaPerdeu(terminouPartidaPerdeu);
+        partidaEmAndamento.setTerminouPartidaGanhou(terminouPartidaGanhou);
 
         final var partidaEmAndamentoSalva = partidaRepository.save(partidaEmAndamento);
         return esconderLetraService.esconder(partidaEmAndamentoSalva);
