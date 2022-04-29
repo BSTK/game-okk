@@ -24,7 +24,7 @@ public class ForcaService {
     }
 
     public Partida jogar(final String letra, final UUID partidaId) {
-        log.info("jogar = Partida: [ {} ] | Letra: [ {} ]", partidaId, letra);
+        log.info("Jogada: Partida = [ {} ] | Letra: [ {} ]", partidaId, letra);
 
         final var partidaEmAndamento = partidaEmAndamento(partidaId);
         final var palavraSecreta = partidaEmAndamento.getPalavraSecreta();

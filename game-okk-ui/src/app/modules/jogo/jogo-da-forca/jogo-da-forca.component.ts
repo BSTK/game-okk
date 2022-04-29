@@ -1,5 +1,6 @@
-import {ActivatedRoute, Router} from '@angular/router';
+import {Location} from '@angular/common';
 import {Partida} from '../shared/model/jogo-da-forca';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {AlertComponent} from '../../../core/alert/alert.component';
 import {JogoDaForcaService} from '../shared/service/jogo-da-forca.service';
@@ -24,6 +25,7 @@ export class JogoDaForcaComponent implements OnInit {
   private readonly cssAcertouJogada = 'botao-jogado botao-jogado-acertou';
 
   constructor(private readonly router: Router,
+              private readonly location: Location,
               private readonly activatedRoute: ActivatedRoute,
               private readonly jogoDaForcaService: JogoDaForcaService) { }
 
@@ -42,12 +44,10 @@ export class JogoDaForcaComponent implements OnInit {
   }
 
   jogar(letra: string) {
-    const partidaId = this.activatedRoute.snapshot.paramMap.get('partidaId');
-
-    if (partidaId) {
+    if (this.partida) {
       this
         .jogoDaForcaService
-        .jogar(partidaId, letra)
+        .jogar(this.partida.uuid, letra)
         .subscribe((partida: Partida) => {
           this.atualizaPartida(partida);
           this.atualizarGanhouPerdeu(partida);
@@ -56,7 +56,6 @@ export class JogoDaForcaComponent implements OnInit {
   }
 
   cssJogada(letra: string): string {
-    console.log('cssJogada : ', letra);
     if (this.partida.letrasCorretas.includes(letra)) { return this.cssAcertouJogada; }
     if (this.partida.letrasIncorretas.includes(letra)) { return this.cssErrouJogada; }
     return '';
@@ -92,6 +91,7 @@ export class JogoDaForcaComponent implements OnInit {
       .novaPartida()
       .subscribe((partida: Partida) => {
         this.atualizaPartida(partida);
+        this.location.replaceState(`/jogo-da-forca/${partida.uuid}`);
       });
   }
 }

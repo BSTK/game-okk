@@ -1,7 +1,6 @@
 package dev.bstk.gameokkjogoforca.domain.service;
 
 import dev.bstk.gameokkjogoforca.domain.model.Dica;
-import dev.bstk.gameokkjogoforca.domain.model.PalavraSecreta;
 import dev.bstk.gameokkjogoforca.domain.model.Partida;
 import org.springframework.stereotype.Component;
 
