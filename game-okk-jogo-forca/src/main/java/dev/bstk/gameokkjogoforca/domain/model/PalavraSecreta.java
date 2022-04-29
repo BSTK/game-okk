@@ -33,7 +33,6 @@ public class PalavraSecreta implements Serializable {
     private List<String> palavra;
 
     @NotNull
-    @NotEmpty
     @Convert(converter = ListDicaConverter.class)
     private List<Dica> dicas;
 }

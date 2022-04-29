@@ -13,6 +13,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import static dev.bstk.gameokkjogoforca.domain.model.PalavraSecreta.TOTAL_ERROS;
+
 @Data
 @Entity
 @Table(name = "PARTIDA")
@@ -89,15 +91,14 @@ public class Partida implements Serializable {
 
     @PreUpdate
     public void dataUpdate() {
+        validaTerminoPartida();
         setDataUpdate(Date.from(Instant.now()));
     }
 
-    /// TODO: REFATORAR PARA UM NOME MAIS DESCRITIVO E CORRETO
     public boolean acertouLetra(final String letra) {
         return getLetrasCorretas().contains(letra);
     }
 
-    /// TODO: REFATORAR PARA UM NOME MAIS DESCRITIVO E CORRETO
     public boolean errouLetra(final String letra) {
         return !acertouLetra(letra);
     }
@@ -107,7 +108,22 @@ public class Partida implements Serializable {
     }
 
     public boolean inicioDePartida() {
-        return getLetrasCorretas().isEmpty()
-            && getLetrasIncorretas().isEmpty();
+        return getLetrasCorretas().isEmpty() && getLetrasIncorretas().isEmpty();
+    }
+
+    private void validaTerminoPartida() {
+        final var perdeuPartida = getTotalErros() == TOTAL_ERROS;
+        final var ganhouPartida = getPalavraSecreta()
+            .getPalavra()
+            .stream()
+            .distinct()
+            .count() == getLetrasCorretas().size();
+
+        setTerminouPartidaPerdeu(perdeuPartida);
+        setTerminouPartidaGanhou(ganhouPartida);
+
+        if (ganhouPartida) {
+            setStatus(PartidaSatus.FINALIZADA);
+        }
     }
 }

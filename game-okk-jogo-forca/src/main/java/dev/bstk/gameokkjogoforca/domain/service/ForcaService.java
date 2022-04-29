@@ -9,9 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
-import static dev.bstk.gameokkjogoforca.domain.model.PalavraSecreta.MASCARA;
-import static dev.bstk.gameokkjogoforca.domain.model.PalavraSecreta.TOTAL_ERROS;
-
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -38,17 +35,6 @@ public class ForcaService {
             partidaEmAndamento.getLetrasIncorretas().add(letra);
             partidaEmAndamento.incrementarTotalErros();
         }
-
-        final var partidaValidaGanhouPerdeu = esconderLetraService.esconder(partidaEmAndamento);
-
-        final var terminouPartidaPerdeu = partidaValidaGanhouPerdeu.getTotalErros() == TOTAL_ERROS;
-        final var terminouPartidaGanhou = partidaValidaGanhouPerdeu
-            .getPalavraSecreta()
-            .getPalavra()
-            .contains(MASCARA);
-
-        partidaEmAndamento.setTerminouPartidaPerdeu(terminouPartidaPerdeu);
-        partidaEmAndamento.setTerminouPartidaGanhou(terminouPartidaGanhou);
 
         final var partidaEmAndamentoSalva = partidaRepository.save(partidaEmAndamento);
         return esconderLetraService.esconder(partidaEmAndamentoSalva);
