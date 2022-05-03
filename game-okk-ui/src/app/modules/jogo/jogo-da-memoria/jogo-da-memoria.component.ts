@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {Nivel} from '../shared/model/jogo-da-memoria';
+import {JogoDaMemoriaService} from '../shared/service/jogo-da-memoria.service';
 
 @Component({
   selector: 'app-jogo-da-memoria',
@@ -7,8 +9,18 @@ import {Component, OnInit} from '@angular/core';
 })
 export class JogoDaMemoriaComponent implements OnInit {
 
-  constructor() { }
+  public niveis: Nivel[] = [];
 
-  ngOnInit(): void { }
+  constructor(private readonly jogoDaMemoriaService: JogoDaMemoriaService) { }
+
+  ngOnInit(): void {
+    this.jogoDaMemoriaService
+      .niveis()
+      .subscribe((niveis: Nivel[]) => {
+        if (niveis) {
+          this.niveis = niveis;
+        }
+      });
+  }
 
 }

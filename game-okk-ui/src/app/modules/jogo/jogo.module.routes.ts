@@ -13,6 +13,10 @@ export const JOGO_ROUTES: Routes = [
     component: JogoDaForcaComponent
   },
   {
+    path: 'jogo-da-memoria',
+    component: JogoDaMemoriaComponent
+  },
+  {
     path: 'jogo-da-memoria/:partidaId',
     component: JogoDaMemoriaComponent
   }

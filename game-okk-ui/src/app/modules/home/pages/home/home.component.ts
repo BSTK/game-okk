@@ -43,11 +43,7 @@ export class HomeComponent implements OnInit {
     }
 
     if (contexto === this.JOGO_DA_MEMORIA) {
-      this.jogoDaMemoriaService
-        .niveis()
-        .subscribe((partida: Partida) => {
-          this.router.navigateByUrl(`/jogo-da-memoria/${partida.uuid}`);
-        });
+      this.router.navigateByUrl('/jogo-da-memoria');
     }
   }
 }

@@ -1,13 +1,24 @@
 <div class="row text-center">
-  <div class="col-md-12">
-    <h1>COMBO DE DE NIVEIS!</h1>
+  <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+    <div class="col-auto">
+      <select class="form-select form-select-lg mb-3">
+        <option [value]="nivel.nivel" *ngFor="let nivel of niveis">
+          {{ nivel.descricao }}
+        </option>
+      </select>
+    </div>
+    <div class="col-auto">
+      <button type="submit" class="btn btn-primary btn-lg">Iniciar</button>
+    </div>
   </div>
 
   <div class="col-md-12">
     <div class="row mt-5 justify-content-center">
-      <div *ngFor="let letra of ['A, B, C, D, H, I, T, G, V']"
-           class="card col-1 p-2 m-2 rounded-3 shadow-sm border-1 botao-letra-alfabeto">
-        {{ letra }}
+      <div *ngFor="let letra of ['A', 'B', 'C', 'D', 'H', 'I', 'T', 'G', 'V']"
+           class="card col-1 p-2 m-2 rounded-3">
+        <img src="https://cdn4.iconfinder.com/data/icons/action-hand-drawn-basic/64/picture-frame-512.png"
+             width="128px" height="128px"
+             class="img-fluid p-3 rounded-start" alt="...">
       </div>
     </div>
   </div>
