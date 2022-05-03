@@ -4,6 +4,7 @@ import {Component, OnInit} from '@angular/core';
 import {HomeService} from '../../service/home.service';
 import {Partida} from '../../../jogo/shared/model/jogo-da-forca';
 import {JogoDaForcaService} from '../../../jogo/shared/service/jogo-da-forca.service';
+import {JogoDaMemoriaService} from '../../../jogo/shared/service/jogo-da-memoria.service';
 
 @Component({
   selector: 'app-home',
@@ -13,12 +14,14 @@ import {JogoDaForcaService} from '../../../jogo/shared/service/jogo-da-forca.ser
 export class HomeComponent implements OnInit {
 
   private readonly JOGO_DA_FORCA = 'jogo-da-forca';
+  private readonly JOGO_DA_MEMORIA = 'jogo-da-memoria';
 
   public jogos: Jogo[] = [];
 
   constructor(private readonly router: Router,
               private readonly homeService: HomeService,
-              private readonly jogoDaForcaService: JogoDaForcaService) { }
+              private readonly jogoDaForcaService: JogoDaForcaService,
+              private readonly jogoDaMemoriaService: JogoDaMemoriaService) { }
 
   ngOnInit(): void {
     this.homeService
@@ -36,6 +39,14 @@ export class HomeComponent implements OnInit {
         .novaPartida()
         .subscribe((partida: Partida) => {
           this.router.navigateByUrl(`/jogo-da-forca/${partida.uuid}`);
+        });
+    }
+
+    if (contexto === this.JOGO_DA_MEMORIA) {
+      this.jogoDaMemoriaService
+        .niveis()
+        .subscribe((partida: Partida) => {
+          this.router.navigateByUrl(`/jogo-da-memoria/${partida.uuid}`);
         });
     }
   }

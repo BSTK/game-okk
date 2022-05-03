@@ -2,10 +2,10 @@ package dev.bstk.gameokkjogomemoria.domain.model;
 
 public enum Nivel {
 
-    FACIO( "Nível Fácil", 12),
+    FACIL( "Nível Fácil", 12),
     MEDIO("Nível Médio", 16),
     DIFICIL("Nível Difícil", 18),
-    MUITO_DIFICIO("Nível Muito Difícil", 20);
+    MUITO_DIFICIL("Nível Muito Difícil", 20);
 
     private final String descricao;
     private final Integer quantidadePares;
@@ -21,5 +21,9 @@ public enum Nivel {
 
     public Integer getQuantidadePares() {
         return quantidadePares;
+    }
+
+    public String getNivel() {
+        return this.name();
     }
 }
