@@ -8,6 +8,5 @@ import java.io.Serializable;
 public class CartaResponse implements Serializable {
 
     private Integer numero;
-    private String imagem;
     private String status;
 }

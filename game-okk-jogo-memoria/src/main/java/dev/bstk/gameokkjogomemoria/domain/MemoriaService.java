@@ -28,16 +28,19 @@ public class MemoriaService {
 
         final var cartas = new ArrayList<Carta>();
 
-        for (int i = 0; i < nivel.getQuantidadePares(); i++) {
-            final var cartaA = new Carta(random.nextInt(100), "imagem-1.png", Carta.Status.INVISIVEL);
-            final var cartaB = new Carta(random.nextInt(100), "imagem-1.png", Carta.Status.INVISIVEL);
+        for (int numeroCarta = 0; numeroCarta < (nivel.getQuantidadePares() * 2); numeroCarta += 2) {
+            final var urlImagem = String.format("imagem-%s.png", numeroCarta);
+            final var cartaA = new Carta(numeroCarta, urlImagem, Carta.Status.INVISIVEL);
+            final var cartaB = new Carta((numeroCarta + 1), urlImagem, Carta.Status.INVISIVEL);
 
             cartas.add(cartaA);
             cartas.add(cartaB);
         }
 
+        embaralhar(cartas);
+
         Tabuleiro tabuleiro = new Tabuleiro();
-        tabuleiro.setNivel(Nivel.MEDIO);
+        tabuleiro.setNivel(nivel);
         tabuleiro.setCartas(cartas);
 
         Partida partida = new Partida();
@@ -48,5 +51,12 @@ public class MemoriaService {
         partida.setTabuleiro(tabuleiro);
 
         return partida;
+    }
+
+    private void embaralhar(List<Carta> sequenciasPares) {
+        Collections.shuffle(sequenciasPares);
+        Collections.reverse(sequenciasPares);
+        Collections.shuffle(sequenciasPares);
+        Collections.reverse(sequenciasPares);
     }
 }

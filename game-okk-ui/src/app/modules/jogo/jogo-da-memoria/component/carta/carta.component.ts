@@ -1,6 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
-import { trigger, state, style, transition, animate } from '@angular/animations';
+import {Component, Input} from '@angular/core';
 import {Carta} from '../../../shared/model/jogo-da-memoria';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'app-carta',
@@ -19,13 +19,9 @@ import {Carta} from '../../../shared/model/jogo-da-memoria';
     ])
   ]
 })
-export class CartaComponent implements OnInit {
+export class CartaComponent {
 
   @Input("carta") public carta: Carta = {} as Carta;
-
-  constructor() { }
-
-  ngOnInit() { }
 
   flip: string = 'inactive';
 
