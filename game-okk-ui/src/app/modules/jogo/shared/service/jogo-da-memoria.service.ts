@@ -1,9 +1,8 @@
 import {Observable} from 'rxjs';
 import {Api} from '../../../../app.api';
 import {Injectable} from '@angular/core';
-import {Partida} from '../model/jogo-da-forca';
 import {HttpClient} from '@angular/common/http';
-import {Nivel} from '../model/jogo-da-memoria';
+import {Nivel, NovaPartida, Partida} from '../model/jogo-da-memoria';
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +11,10 @@ export class JogoDaMemoriaService {
 
   constructor(private readonly httpClient: HttpClient) { }
 
-  public novaPartida(): Observable<Partida> {
+  public novaPartida(novaPartida: NovaPartida): Observable<Partida> {
     return this
       .httpClient
-      .post<Partida>(Api.URLS.jogoDaMemoria.novaPartida, {});
+      .post<Partida>(Api.URLS.jogoDaMemoria.novaPartida, novaPartida);
   }
 
   public niveis(): Observable<Nivel[]> {

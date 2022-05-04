@@ -1,16 +1,15 @@
 package dev.bstk.gameokkjogomemoria.domain;
 
+import dev.bstk.gameokkjogomemoria.api.request.NovaPartidaRequest;
 import dev.bstk.gameokkjogomemoria.domain.model.*;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class MemoriaService {
 
+    private final Random random = new Random();
 
     public Partida partida(final UUID partidaId) {
         return new Partida();
@@ -24,12 +23,18 @@ public class MemoriaService {
         return Arrays.asList(Nivel.values());
     }
 
-    public Partida novaPartida() {
-        List<Carta> cartas = Arrays.asList(
-            new Carta(1, "imagem-1.png", Carta.Status.INVISIVEL),
-            new Carta(2, "imagem-2.png", Carta.Status.VISIVEL),
-            new Carta(3, "imagem-2.png", Carta.Status.VISIVEL),
-            new Carta(4, "imagem-4.png", Carta.Status.INVISIVEL));
+    public Partida novaPartida(final NovaPartidaRequest request) {
+        Nivel nivel = Nivel.valueOf(request.getNivel());
+
+        final var cartas = new ArrayList<Carta>();
+
+        for (int i = 0; i < nivel.getQuantidadePares(); i++) {
+            final var cartaA = new Carta(random.nextInt(100), "imagem-1.png", Carta.Status.INVISIVEL);
+            final var cartaB = new Carta(random.nextInt(100), "imagem-1.png", Carta.Status.INVISIVEL);
+
+            cartas.add(cartaA);
+            cartas.add(cartaB);
+        }
 
         Tabuleiro tabuleiro = new Tabuleiro();
         tabuleiro.setNivel(Nivel.MEDIO);

@@ -1,24 +1,26 @@
 <div class="row text-center">
   <div class="d-grid gap-2 d-md-flex justify-content-md-center">
     <div class="col-auto">
-      <select class="form-select form-select-lg mb-3">
+      <select class="form-select form-select-lg mb-3"
+              name="nivelSelecionado"
+              [(ngModel)]="nivelSelecionado">
         <option [value]="nivel.nivel" *ngFor="let nivel of niveis">
           {{ nivel.descricao }}
         </option>
       </select>
     </div>
     <div class="col-auto">
-      <button type="submit" class="btn btn-primary btn-lg">Iniciar</button>
+      <button type="button" class="btn btn-primary btn-lg"
+        (click)="iniciar()">
+        Iniciar
+      </button>
     </div>
   </div>
 
   <div class="col-md-12">
     <div class="row mt-5 justify-content-center">
-      <div *ngFor="let letra of ['A', 'B', 'C', 'D', 'H', 'I', 'T', 'G', 'V']"
-           class="card col-1 p-2 m-2 rounded-3">
-        <img src="https://cdn4.iconfinder.com/data/icons/action-hand-drawn-basic/64/picture-frame-512.png"
-             width="128px" height="128px"
-             class="img-fluid p-3 rounded-start" alt="...">
+      <div class="card col-md-1 p-2 m-2 rounded-3" *ngFor="let carta of partida?.tabuleiro?.cartas">
+        <app-carta [carta]="carta"></app-carta>
       </div>
     </div>
   </div>

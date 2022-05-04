@@ -1,6 +1,7 @@
 package dev.bstk.gameokkjogomemoria.api;
 
 import dev.bstk.gameokk.core.Mapper;
+import dev.bstk.gameokkjogomemoria.api.request.NovaPartidaRequest;
 import dev.bstk.gameokkjogomemoria.api.response.NivelResponse;
 import dev.bstk.gameokkjogomemoria.api.response.PartidaResponse;
 import dev.bstk.gameokkjogomemoria.domain.MemoriaService;
@@ -47,8 +48,8 @@ public class MemoriaController {
     }
 
     @PostMapping("/nova-partida")
-    public ResponseEntity<PartidaResponse> novaPartida() {
-        final var partida = memoriaService.novaPartida();
+    public ResponseEntity<PartidaResponse> novaPartida(@RequestBody final NovaPartidaRequest request) {
+        final var partida = memoriaService.novaPartida(request);
         final var partidaResponse = Mapper.to(partida, PartidaResponse.class);
 
         return ResponseEntity.ok(partidaResponse);

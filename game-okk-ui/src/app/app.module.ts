@@ -5,6 +5,7 @@ import {LOCALE_ID, NgModule} from '@angular/core';
 import {registerLocaleData} from '@angular/common';
 import {BrowserModule} from '@angular/platform-browser';
 import {APP_ROUTING_PROVIDER, ROUTING} from './app.routing';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 registerLocaleData(ptBr);
 
@@ -15,7 +16,8 @@ registerLocaleData(ptBr);
   imports: [
     ROUTING,
     CoreModule,
-    BrowserModule
+    BrowserModule,
+    BrowserAnimationsModule
   ],
   providers: [
     APP_ROUTING_PROVIDER,
